@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="丝路印记·中卫文脉——中华文脉延续行动思政实践主题网页，展现宁夏中卫的丝路历史、黄河文化、馆藏文物与青年思考。">
+<title>丝路印记·中卫文脉 | 中华文脉延续行动</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   设计变量：夜蓝 / 漠金 / 大河碧 / 纸白
+   ========================================================== */
+:root {
+  --ink: #14202E;
+  --ink-soft: #33465C;
+  --night: #0F1B2D;
+  --night-2: #16273E;
+  --gold: #C99B5F;
+  --gold-deep: #A9733F;
+  --gold-bright: #E4B45F;
+  --teal: #2E8B7F;
+  --teal-soft: #3FA195;
+  --cream: #FBF4E7;
+  --paper: #FFFDF7;
+  --sand-bg: #F3E7D2;
+  --muted: #65717E;
+  --line: rgba(20, 32, 46, .12);
+  --glass: rgba(255, 253, 247, .66);
+  --shadow-sm: 0 10px 30px rgba(15, 27, 45, .08);
+  --shadow-md: 0 24px 60px rgba(15, 27, 45, .15);
+  --radius: 8px;
+  --container: 1200px;
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", sans-serif;
+}
+
+/* ==========================================================
+   基础
+   ========================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.75;
+  background:
+    linear-gradient(rgba(169, 115, 63, .045) 1px, transparent 1px) 0 0 / 34px 34px,
+    var(--paper);
+  overflow-x: hidden;
+}
+
+body.lock {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  z-index: 400;
+  padding: 10px 16px;
+  background: var(--night);
+  color: var(--cream);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  left: 8px;
+}
+
+.container {
+  width: min(var(--container), 100% - 40px);
+  margin-inline: auto;
+}
+
+section {
+  scroll-margin-top: 84px;
+}
+
+/* 顶部滚动进度 */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  z-index: 220;
+  background: linear-gradient(90deg, var(--gold-bright), var(--teal));
+  transition: width .1s linear;
+}
+
+/* ==========================================================
+   导航栏：吸顶 + 滚动变色
+   ========================================================== */
+.navbar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 200;
+  color: var(--cream);
+  transition: background .4s ease, box-shadow .4s ease, backdrop-filter .4s ease, border-color .4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(13, 25, 44, .78);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom-color: rgba(250, 244, 231, .1);
+  box-shadow: 0 14px 38px rgba(8, 17, 32, .28);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 18px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 1.14rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--night);
+  background: linear-gradient(135deg, var(--gold-bright), var(--teal));
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(228, 180, 95, .35);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 34px);
+}
+
+.nav-link {
+  position: relative;
+  padding: 8px 2px;
+  font-size: .96rem;
+  color: rgba(250, 244, 231, .86);
+  transition: color .25s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--teal));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(250, 244, 231, .3);
+  border-radius: var(--radius);
+  place-items: center;
+  background: rgba(250, 244, 231, .08);
+}
+
+.menu-toggle span {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--cream);
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--cream);
+  transition: transform .3s ease, top .3s ease;
+}
+
+.menu-toggle span::before {
+  top: -6px;
+}
+
+.menu-toggle span::after {
+  top: 6px;
+}
+
+.menu-toggle.open span {
+  background: transparent;
+}
+
+.menu-toggle.open span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* ==========================================================
+   通用区块
+   ========================================================== */
+.section {
+  position: relative;
+  padding-block: clamp(84px, 10vw, 148px);
+}
+
+.section-head {
+  max-width: 840px;
+  margin-bottom: 58px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--teal);
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 38px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+}
+
+.section-head h2 {
+  margin: 16px 0 18px;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.3vw, 3.2rem);
+  line-height: 1.24;
+  color: var(--night);
+}
+
+.grad-text {
+  background: linear-gradient(100deg, var(--gold-deep) 0%, var(--gold-bright) 42%, var(--teal) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.underline-art {
+  display: inline-block;
+  position: relative;
+}
+
+.underline-art::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: .08em;
+  height: .34em;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(228, 180, 95, .5), rgba(46, 139, 127, .4));
+  border-radius: 4px;
+}
+
+.section-head .lead {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+/* 渐变边框工具 */
+.g-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    linear-gradient(120deg, rgba(201, 155, 95, .62), rgba(46, 139, 127, .58)) border-box;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .85s ease, transform .85s cubic-bezier(.2, .7, .2, 1);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+.reveal-d4 { transition-delay: .4s; }
+
+/* 图片 Hover Zoom */
+.media-frame {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--sand-bg), var(--teal-soft));
+}
+
+.media-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.2, .7, .2, 1), filter .5s ease;
+}
+
+.media-frame:hover img,
+.media-frame:focus-within img {
+  transform: scale(1.09);
+  filter: saturate(1.08);
+}
+
+/* ==========================================================
+   英雄区
+   ========================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--cream);
+  background:
+    linear-gradient(180deg, rgba(8, 16, 30, .68) 0%, rgba(8, 16, 30, .34) 42%, rgba(15, 30, 50, .82) 100%),
+    url("images/photo-1509316785289-025f5b846b35.avif") center 30% / cover no-repeat,
+    linear-gradient(160deg, var(--night), var(--teal));
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 16, 30, .28), transparent 55%),
+    linear-gradient(180deg, transparent 62%, rgba(8, 16, 30, .55));
+  pointer-events: none;
+}
+
+#dustCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-block: 132px 108px;
+  max-width: 1000px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: .88rem;
+  font-weight: 600;
+  background: rgba(250, 244, 231, .12);
+  border: 1px solid rgba(250, 244, 231, .28);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 0 4px rgba(228, 180, 95, .25);
+}
+
+.hero h1 {
+  margin: 26px 0 20px;
+  font-family: var(--serif);
+  font-size: clamp(2.7rem, 7vw, 5.4rem);
+  line-height: 1.14;
+  font-weight: 900;
+  text-shadow: 0 12px 44px rgba(8, 16, 30, .55);
+}
+
+.hero h1 span {
+  background: linear-gradient(100deg, #F6D18E 8%, #E4B45F 42%, #57C0B1 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sub {
+  max-width: 720px;
+  margin-bottom: 24px;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: rgba(250, 244, 231, .94);
+  text-shadow: 0 2px 14px rgba(8, 16, 30, .4);
+}
+
+.typewriter {
+  min-height: 2em;
+  margin-bottom: 34px;
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.9vw, 1.24rem);
+  color: #F3DCAF;
+}
+
+.type-label {
+  margin-right: 8px;
+  font-family: var(--sans);
+  font-size: .86em;
+  color: rgba(250, 244, 231, .7);
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: var(--teal-soft);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+  max-width: 780px;
+}
+
+.stat-chip {
+  padding: 15px 12px;
+  text-align: center;
+  background: rgba(250, 244, 231, .1);
+  border: 1px solid rgba(250, 244, 231, .24);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 26px rgba(8, 16, 30, .18);
+  transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.stat-chip:hover {
+  transform: translateY(-4px);
+  background: rgba(250, 244, 231, .17);
+  box-shadow: 0 16px 34px rgba(8, 16, 30, .28);
+}
+
+.stat-chip b {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: #F6D18E;
+}
+
+.stat-chip small {
+  font-size: .78rem;
+  color: rgba(250, 244, 231, .8);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: .98rem;
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease;
+}
+
+.btn svg {
+  transition: transform .3s ease;
+}
+
+.btn:hover svg {
+  transform: translateX(4px);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--gold), var(--gold-deep));
+  color: #2B1C0E;
+  box-shadow: 0 14px 30px rgba(201, 155, 95, .36);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(201, 155, 95, .5);
+}
+
+.btn-ghost {
+  color: var(--cream);
+  background: rgba(250, 244, 231, .08);
+  border: 1px solid rgba(250, 244, 231, .42);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px);
+  background: rgba(250, 244, 231, .16);
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: .8rem;
+  color: rgba(250, 244, 231, .82);
+}
+
+.scroll-cue svg {
+  animation: cueBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes cueBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+
+/* ==========================================================
+   板块一：历史交汇
+   ========================================================== */
+.history-grid {
+  display: grid;
+  grid-template-columns: 1.06fr .94fr;
+  gap: 54px;
+  align-items: center;
+}
+
+.history-copy > p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.history-copy strong {
+  color: var(--ink);
+}
+
+.pillar-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.pillar {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--glass);
+  border: 1px solid rgba(201, 155, 95, .3);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.pillar:hover {
+  transform: translateY(-5px);
+  border-color: var(--teal);
+  box-shadow: var(--shadow-md);
+}
+
+.pillar-icon {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  color: var(--cream);
+  background: linear-gradient(135deg, var(--night), var(--teal));
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(15, 27, 45, .22);
+}
+
+.pillar h3 {
+  margin-bottom: 6px;
+  font-family: var(--serif);
+  font-size: 1.14rem;
+  color: var(--night);
+}
+
+.pillar p {
+  font-size: .94rem;
+  color: var(--muted);
+}
+
+.photo-collage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.25fr .75fr;
+  gap: 16px;
+  min-height: 560px;
+}
+
+.photo-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--sand-bg), var(--teal-soft));
+}
+
+.photo-tile.large {
+  grid-row: 1 / 3;
+}
+
+.photo-tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.photo-tile:hover img {
+  transform: scale(1.09);
+}
+
+.photo-tile .tile-caption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  right: 14px;
+  padding: 10px 14px;
+  font-size: .82rem;
+  color: var(--cream);
+  background: rgba(11, 22, 38, .6);
+  border: 1px solid rgba(250, 244, 231, .22);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.float-note {
+  position: absolute;
+  right: -16px;
+  top: 30px;
+  z-index: 2;
+  width: 210px;
+  padding: 16px 18px;
+  font-size: .9rem;
+  color: var(--night);
+  background: rgba(255, 253, 247, .82);
+  border: 1px solid rgba(201, 155, 95, .36);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.float-note b {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--serif);
+  color: var(--gold-deep);
+}
+
+/* 丝路北道要塞卡片 */
+.fortress-card {
+  position: relative;
+  margin-top: 64px;
+  padding: clamp(26px, 4vw, 42px);
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.fortress-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(250, 244, 231, .045) 1px, transparent 1px) 0 0 / 100% 46px,
+    linear-gradient(90deg, rgba(250, 244, 231, .045) 1px, transparent 1px) 0 0 / 46px 100%;
+  pointer-events: none;
+}
+
+.fortress-card .fk-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.fk-text {
+  max-width: 760px;
+}
+
+.fk-text h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  color: var(--night);
+  margin-bottom: 10px;
+}
+
+.fk-text p {
+  color: var(--muted);
+  font-size: .98rem;
+}
+
+.fk-seal {
+  flex: none;
+  width: 108px;
+  height: 108px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: .92rem;
+  line-height: 1.5;
+  color: #fff;
+  background: linear-gradient(150deg, #A33B2B, #7E2418);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 30px rgba(126, 36, 24, .35);
+  transform: rotate(-3deg);
+}
+
+/* 时间轴 */
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+  margin-top: 72px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 2%;
+  right: 2%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--teal) 55%, var(--night-2) 100%);
+}
+
+.tl-item {
+  position: relative;
+  padding-top: 48px;
+}
+
+.tl-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--night);
+  border: 5px solid var(--gold-bright);
+  box-shadow: 0 0 0 4px rgba(228, 180, 95, .3);
+}
+
+.tl-period {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 12px;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--teal);
+  background: rgba(46, 139, 127, .1);
+  border-radius: 999px;
+}
+
+.tl-item h3 {
+  margin-bottom: 8px;
+  font-family: var(--serif);
+  font-size: 1.14rem;
+  color: var(--night);
+}
+
+.tl-item p {
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* ==========================================================
+   板块二：馆藏珍宝 + 弹窗
+   ========================================================== */
+.collection-section {
+  background:
+    linear-gradient(180deg, rgba(201, 155, 95, .08), rgba(46, 139, 127, .06)),
+    var(--paper);
+  border-block: 1px solid rgba(15, 27, 45, .08);
+}
+
+.collection-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: -18px;
+  margin-bottom: 38px;
+}
+
+.collection-intro p {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: .98rem;
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.artifact-card {
+  perspective: 1100px;
+  height: 100%;
+}
+
+.card-inner {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #FFFDF6;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0));
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease;
+}
+
+.artifact-card:hover .card-inner {
+  box-shadow: var(--shadow-md);
+  --lift: -8px;
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .34), transparent 46%);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.artifact-card:hover .shine {
+  opacity: 1;
+}
+
+.card-media {
+  height: 212px;
+  flex: none;
+}
+
+.card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 42%, rgba(10, 21, 36, .58));
+}
+
+.card-media .dynasty-tag {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 2;
+  padding: 4px 12px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--cream);
+  background: rgba(15, 27, 45, .55);
+  border: 1px solid rgba(250, 244, 231, .3);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.artifact-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px;
+}
+
+.artifact-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.artifact-tags span {
+  padding: 3px 10px;
+  font-size: .74rem;
+  color: var(--teal);
+  background: rgba(46, 139, 127, .1);
+  border: 1px solid rgba(46, 139, 127, .2);
+  border-radius: 999px;
+}
+
+.artifact-body h3 {
+  margin-bottom: 8px;
+  font-family: var(--serif);
+  font-size: 1.22rem;
+  color: var(--night);
+}
+
+.artifact-body p {
+  font-size: .9rem;
+  color: var(--muted);
+  flex: 1;
+}
+
+.artifact-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.artifact-foot .era {
+  font-size: .8rem;
+  color: var(--ink-soft);
+}
+
+.artifact-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--teal);
+  background: rgba(46, 139, 127, .08);
+  border: 1px solid rgba(46, 139, 127, .24);
+  border-radius: var(--radius);
+  transition: background .3s ease, transform .3s ease, gap .3s ease;
+}
+
+.artifact-open:hover {
+  gap: 11px;
+  background: rgba(46, 139, 127, .16);
+  transform: translateY(-2px);
+}
+
+/* 弹窗 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  place-items: center;
+  padding: 22px;
+  background: rgba(8, 16, 30, .64);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.modal-backdrop.open {
+  display: grid;
+  animation: modalFade .3s ease;
+}
+
+@keyframes modalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  position: relative;
+  width: min(880px, 100%);
+  max-height: min(86vh, 860px);
+  overflow: auto;
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: 0 40px 90px rgba(8, 16, 30, .45);
+  animation: modalRise .38s cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes modalRise {
+  from { opacity: 0; transform: translateY(26px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+
+.modal-close {
+  position: sticky;
+  top: 14px;
+  z-index: 3;
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-right: 14px;
+  color: var(--night);
+  background: rgba(255, 253, 247, .86);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform .3s ease, background .3s ease;
+}
+
+.modal-close:hover {
+  transform: rotate(6deg) scale(1.05);
+  background: #fff;
+}
+
+.modal-hero {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--sand-bg), var(--teal-soft));
+}
+
+.modal-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(10, 21, 36, .66));
+}
+
+.modal-hero .hero-title {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 26px;
+  z-index: 2;
+  color: var(--cream);
+}
+
+.modal-hero .hero-title small {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .84rem;
+  color: #F6D18E;
+}
+
+.modal-hero .hero-title h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.modal-content {
+  padding: 32px;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.modal-tags span {
+  padding: 4px 12px;
+  font-size: .78rem;
+  color: var(--teal);
+  background: rgba(46, 139, 127, .1);
+  border: 1px solid rgba(46, 139, 127, .22);
+  border-radius: 999px;
+}
+
+.modal-content p {
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: .98rem;
+}
+
+.modal-content p:first-of-type {
+  color: var(--ink);
+  font-size: 1.04rem;
+}
+
+.modal-highlight {
+  position: relative;
+  margin: 24px 0;
+  padding: 20px 24px 20px 28px;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--night);
+  background: linear-gradient(90deg, rgba(201, 155, 95, .16), rgba(46, 139, 127, .12));
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+}
+
+.modal-footnote {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+/* ==========================================================
+   板块三：文脉传承
+   ========================================================== */
+.heritage-section {
+  background:
+    linear-gradient(180deg, rgba(46, 139, 127, .05), rgba(201, 155, 95, .06)),
+    var(--paper);
+}
+
+.heritage-grid {
+  display: grid;
+  grid-template-columns: 1.04fr .96fr;
+  gap: 52px;
+  align-items: start;
+}
+
+.pathway-list {
+  display: grid;
+}
+
+.pathway {
+  display: flex;
+  gap: 18px;
+  padding: 20px 4px;
+  border-bottom: 1px dashed var(--line);
+  transition: transform .3s ease, background .3s ease;
+}
+
+.pathway:hover {
+  transform: translateX(6px);
+  background: linear-gradient(90deg, rgba(201, 155, 95, .1), transparent);
+}
+
+.pathway:last-child {
+  border-bottom: 0;
+}
+
+.pathway-num {
+  flex: none;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  line-height: 1;
+}
+
+.pathway h3 {
+  margin-bottom: 6px;
+  font-family: var(--serif);
+  font-size: 1.16rem;
+  color: var(--night);
+}
+
+.pathway p {
+  font-size: .94rem;
+  color: var(--muted);
+}
+
+.dashboard {
+  position: relative;
+  padding: 32px;
+  color: var(--cream);
+  background: linear-gradient(160deg, var(--night) 0%, #13304A 100%);
+  border: 1px solid rgba(201, 155, 95, .24);
+  border-radius: var(--radius);
+  box-shadow: 0 28px 64px rgba(15, 27, 45, .28);
+  overflow: hidden;
+}
+
+.dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(250, 244, 231, .05) 1px, transparent 1px) 0 0 / 100% 44px,
+    linear-gradient(90deg, rgba(250, 244, 231, .05) 1px, transparent 1px) 0 0 / 44px 100%;
+  pointer-events: none;
+}
+
+.dashboard-head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.dashboard-head h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+}
+
+.dashboard-head span {
+  flex: none;
+  padding: 5px 11px;
+  font-size: .74rem;
+  color: #F6D18E;
+  border: 1px solid rgba(201, 155, 95, .5);
+  border-radius: 999px;
+}
+
+.bar-row {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.bar-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+  font-size: .88rem;
+}
+
+.bar-head b {
+  color: #F6D18E;
+  font-weight: 600;
+}
+
+.bar-track {
+  height: 10px;
+  overflow: hidden;
+  background: rgba(250, 244, 231, .13);
+  border-radius: 999px;
+}
+
+.bar-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright) 55%, var(--teal));
+  border-radius: 999px;
+  transition: width 1.4s cubic-bezier(.2, .7, .2, 1);
+}
+
+.dashboard.in-view .bar-fill {
+  width: var(--w, 0%);
+}
+
+.counter-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.counter {
+  padding: 14px 8px;
+  text-align: center;
+  background: rgba(250, 244, 231, .08);
+  border: 1px solid rgba(250, 244, 231, .16);
+  border-radius: var(--radius);
+}
+
+.counter b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.42rem;
+  color: #F6D18E;
+  line-height: 1.3;
+}
+
+.counter small {
+  font-size: .74rem;
+  color: rgba(250, 244, 231, .72);
+}
+
+.dashboard-note {
+  position: relative;
+  margin-top: 18px;
+  font-size: .76rem;
+  color: rgba(250, 244, 231, .55);
+  text-align: right;
+}
+
+.quote-band {
+  position: relative;
+  margin-top: 64px;
+  padding: 38px 44px 38px 54px;
+  background: linear-gradient(90deg, rgba(201, 155, 95, .15), rgba(46, 139, 127, .13));
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+}
+
+.quote-band::before {
+  content: "“";
+  position: absolute;
+  left: 14px;
+  top: 2px;
+  font-family: var(--serif);
+  font-size: 4.8rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: .55;
+}
+
+.quote-band p {
+  position: relative;
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  color: var(--night);
+  line-height: 1.7;
+}
+
+.quote-band small {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--sans);
+  font-size: .85rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ==========================================================
+   板块四：青年思考 · 文脉续写
+   ========================================================== */
+.thinking-section {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(201, 155, 95, .1), transparent 55%),
+    linear-gradient(180deg, var(--paper), var(--sand-bg));
+}
+
+.thinking-grid {
+  display: grid;
+  grid-template-columns: 1.04fr .96fr;
+  gap: 38px;
+  align-items: stretch;
+}
+
+.thinking-card {
+  position: relative;
+  padding: clamp(26px, 4vw, 44px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.thinking-card .card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.thinking-card .card-title h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--night);
+}
+
+.thinking-card .card-title span {
+  padding: 5px 12px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: var(--teal);
+  background: rgba(46, 139, 127, .1);
+  border: 1px solid rgba(46, 139, 127, .24);
+  border-radius: 999px;
+}
+
+.qa-list {
+  display: grid;
+  gap: 4px;
+}
+
+.qa-item {
+  border-bottom: 1px dashed var(--line);
+}
+
+.qa-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 4px;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 1.04rem;
+  font-weight: 700;
+  color: var(--night);
+  transition: color .25s ease;
+}
+
+.qa-question:hover {
+  color: var(--teal);
+}
+
+.qa-icon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--gold-deep);
+  border: 1px solid rgba(201, 155, 95, .4);
+  border-radius: 50%;
+  transition: transform .35s ease, background .3s ease, color .3s ease;
+}
+
+.qa-item.open .qa-icon {
+  transform: rotate(45deg);
+  color: var(--cream);
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.qa-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .45s cubic-bezier(.2, .7, .2, 1);
+}
+
+.qa-item.open .qa-answer {
+  grid-template-rows: 1fr;
+}
+
+.qa-answer-inner {
+  overflow: hidden;
+}
+
+.qa-answer-inner p {
+  padding: 0 4px 18px;
+  font-size: .94rem;
+  color: var(--muted);
+}
+
+.write-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.write-panel .wp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.write-panel .wp-head h3 {
+  font-family: var(--serif);
+  font-size: 1.16rem;
+  color: var(--night);
+}
+
+.write-panel .wp-head .progress {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.practice-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.practice-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: .86rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: rgba(255, 253, 247, .72);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform .25s ease, background .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.practice-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--teal);
+}
+
+.practice-chip.active {
+  color: #fff;
+  background: linear-gradient(120deg, var(--teal), var(--teal-soft));
+  border-color: transparent;
+  box-shadow: 0 10px 24px rgba(46, 139, 127, .3);
+}
+
+.practice-chip .check {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  font-size: .72rem;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+.practice-chip.active .check {
+  background: rgba(255, 255, 255, .25);
+}
+
+.note-box {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-box textarea {
+  width: 100%;
+  min-height: 190px;
+  resize: vertical;
+  padding: 16px;
+  font-family: var(--sans);
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: rgba(255, 253, 247, .9);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: inset 0 2px 8px rgba(15, 27, 45, .04);
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+.note-box textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(46, 139, 127, .14);
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.note-meta .count {
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+.note-meta .count b {
+  color: var(--gold-deep);
+}
+
+.save-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: #2B1C0E;
+  background: linear-gradient(120deg, var(--gold-bright), var(--gold));
+  border-radius: var(--radius);
+  box-shadow: 0 12px 26px rgba(201, 155, 95, .35);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.save-note:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(201, 155, 95, .45);
+}
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 8px 14px;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #A33B2B;
+  border: 2px solid #A33B2B;
+  border-radius: var(--radius);
+  opacity: 0;
+  transform: translateY(8px) rotate(-2deg);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+.stamp.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================
+   页脚
+   ========================================================== */
+.footer {
+  padding: 56px 0 28px;
+  color: rgba(250, 244, 231, .8);
+  background: linear-gradient(160deg, #0D1B30, var(--night) 55%, #143247);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  max-width: 430px;
+}
+
+.footer-brand .brand {
+  margin-bottom: 12px;
+}
+
+.footer-brand p {
+  font-size: .92rem;
+  color: rgba(250, 244, 231, .7);
+}
+
+.footer-links {
+  display: flex;
+  gap: 26px;
+  padding-top: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  position: relative;
+  font-size: .94rem;
+  color: rgba(250, 244, 231, .85);
+  transition: color .25s ease;
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  transform: scaleX(0);
+  transition: transform .3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.footer-statement {
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(250, 244, 231, .16);
+  text-align: center;
+  font-size: .9rem;
+}
+
+.to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 180;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  color: var(--night);
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  border-radius: var(--radius);
+  box-shadow: 0 12px 28px rgba(15, 27, 45, .3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity .3s ease, transform .3s ease, visibility .3s ease;
+}
+
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.to-top:hover {
+  transform: translateY(-3px);
+}
+
+/* ==========================================================
+   响应式
+   ========================================================== */
+@media (max-width: 1080px) {
+  .history-grid,
+  .heritage-grid,
+  .thinking-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 34px 28px;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+
+  .photo-collage {
+    min-height: 480px;
+  }
+
+  .float-note {
+    right: 10px;
+  }
+}
+
+@media (max-width: 860px) {
+  .menu-toggle {
+    display: grid;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 14px;
+    background: rgba(13, 25, 44, .94);
+    border: 1px solid rgba(250, 244, 231, .16);
+    border-radius: var(--radius);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity .3s ease, transform .3s ease, visibility .3s;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-link {
+    padding: 12px 8px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo-collage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 280px 200px 200px;
+    min-height: 0;
+  }
+
+  .photo-tile.large {
+    grid-row: auto;
+  }
+
+  .float-note {
+    position: static;
+    width: auto;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    padding: 22px;
+  }
+
+  .modal-hero {
+    height: 220px;
+  }
+
+  .fortress-card .fk-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fk-seal {
+    width: 92px;
+    height: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ==================== 导航栏 ==================== -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a class="brand" href="#home" aria-label="丝路印记·中卫文脉 首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path>
+          <path d="m8.5 8.5 4-1.5 1.5 4-4 1.5z"></path>
+        </svg>
+      </span>
+      丝路印记 · 中卫文脉
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a class="nav-link active" href="#home">首页</a>
+      <a class="nav-link" href="#history">历史交汇</a>
+      <a class="nav-link" href="#collection">馆藏珍宝</a>
+      <a class="nav-link" href="#heritage">文脉传承</a>
+      <a class="nav-link" href="#thinking">青年思考</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="打开导航菜单">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ==================== 英雄区 ==================== -->
+  <section class="hero" id="home">
+    <canvas id="dustCanvas" aria-hidden="true"></canvas>
+
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-eyebrow">中华文脉延续行动 · 思政社会实践</span>
+        <h1>大漠长河间，<span>丝路中卫</span></h1>
+        <p class="hero-sub">
+          中卫，宁夏平原的黄河古城。腾格里沙漠与滔滔长河在这里相遇，
+          驼铃穿越沙海，筏影横渡黄河，让这座边城成为丝绸之路北道上
+          重要的渡口、驿站与军事要塞。
+        </p>
+
+        <div class="typewriter" aria-live="polite">
+          <span class="type-label">文脉回响 ·</span><span id="typeText"></span><span class="caret" aria-hidden="true"></span>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-chip"><b>黄河入宁第一站</b><small>黑山峡以下的中卫河段</small></div>
+          <div class="stat-chip"><b>397 公里</b><small>黄河在宁夏的流程</small></div>
+          <div class="stat-chip"><b>腾格里沙漠</b><small>沙海与绿洲相接</small></div>
+          <div class="stat-chip"><b>千年羊皮筏</b><small>黄河古渡的记忆</small></div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#history">
+            走进丝路历史
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <a class="btn btn-ghost" href="#collection">探访馆藏珍宝</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>向下滚动</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+    </div>
+  </section>
+
+  <!-- ==================== 板块一：历史交汇 ==================== -->
+  <section class="section" id="history">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">01 · 历史交汇</span>
+        <h2>大漠与黄河的<span class="grad-text underline-art">交响</span></h2>
+        <p class="lead">
+          一边是腾格里沙漠的金色沙海，一边是黄河滋养的塞上绿洲。
+          中卫在两种地貌之间生长了千年，也因此在丝路北道上留下了
+          渡口、驿站、卫所与文物交织的漫长故事。
+        </p>
+      </div>
+
+      <div class="history-grid">
+        <div class="history-copy reveal reveal-d1">
+          <p>
+            中卫地处宁夏中西部，北依腾格里沙漠，南枕香山，黄河自西南向东北穿境而过。
+            早在秦汉时期，先民便在这里引黄开渠、屯垦造田，将荒漠边缘的河套地带
+            经营成稻麦飘香的“<strong>塞上江南</strong>”。
+          </p>
+          <p>
+            当汉唐丝路自长安西行，经陇山古道进入宁夏平原，再由灵州、中卫
+            渡黄河、出凉州，中卫便成为“<strong>丝绸之路北道</strong>”上的咽喉节点：
+            骆驼在这里歇脚，货物在这里换乘，戍卒在这里守关。
+          </p>
+
+          <div class="pillar-list">
+            <article class="pillar reveal">
+              <span class="pillar-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4.4 0-8-3.6-8-8 0-5 6-12 8-12s8 7 8 12c0 4.4-3.6 8-8 8z"></path><path d="M9 12h6M12 9v6"></path></svg>
+              </span>
+              <div>
+                <h3>塞上江南 · 引黄沃土</h3>
+                <p>黄河自黑山峡进入宁夏，中卫成为黄河入宁第一站。历代灌渠与黄河水共同滋养出稻麦飘香的宁夏平原，“天下黄河富宁夏，首富中卫”正是对这方绿洲的礼赞。</p>
+              </div>
+            </article>
+
+            <article class="pillar reveal reveal-d1">
+              <span class="pillar-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c3-2 6-2 9 0s6 2 9 0"></path><path d="M3 12c3-2 6-2 9 0s6 2 9 0"></path><path d="M3 7c3-2 6-2 9 0s6 2 9 0"></path></svg>
+              </span>
+              <div>
+                <h3>黄河古渡 · 羊皮筏影</h3>
+                <p>在桥梁稀少、木船难行的年代，整张羊皮充气扎筏、顺水漂渡，曾是黄河两岸最实用的交通方式。筏工号子与驼铃声，在中卫沿河渡口此起彼伏。</p>
+              </div>
+            </article>
+
+            <article class="pillar reveal reveal-d2">
+              <span class="pillar-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l6-5 6 5v13"></path><path d="M3 21h18"></path><path d="M9 8v2M9 12v2M9 16v2"></path></svg>
+              </span>
+              <div>
+                <h3>丝路北道 · 边城锁钥</h3>
+                <p>汉唐商旅由固原、灵州一路西行，在中卫渡黄河后进入河西走廊。明代设卫驻军、屯田护驿，使中卫既是商贸渡口，也是控扼大漠的军事重镇。</p>
+              </div>
+            </article>
+          </div>
+
+          <p class="pillar-note">
+            今日中卫市博物馆的丝路展陈，正是对这些渡口、驿道与卫所记忆的系统收藏。
+          </p>
+        </div>
+
+        <div class="photo-collage reveal reveal-d2">
+          <figure class="photo-tile large">
+            <img src="images/history-sand-oasis.png" alt="腾格里沙漠边缘的金色沙丘与光影" loading="lazy">
+            <figcaption class="tile-caption">沙海与绿洲相接，丝路驼队曾沿沙丘边缘行进</figcaption>
+          </figure>
+          <figure class="photo-tile">
+            <img src="images/history-oasis-fields.png" alt="引黄灌溉滋养的宁夏绿洲田野" loading="lazy">
+            <figcaption class="tile-caption">引黄灌渠滋养的塞上江南</figcaption>
+          </figure>
+          <figure class="photo-tile">
+            <img src="images/history-caravan.png" alt="沙漠中的骆驼商队剪影" loading="lazy">
+            <figcaption class="tile-caption">驼铃声响，商旅西行</figcaption>
+          </figure>
+
+          <aside class="float-note">
+            <b>“驼铃古道丝绸路”</b>
+            中卫渡口与驿站，让货物与文明在这里短暂停留，又继续向西。
+          </aside>
+        </div>
+      </div>
+
+      <!-- 丝路北道要塞 -->
+      <div class="fortress-card g-border reveal">
+        <div class="fk-body">
+          <div class="fk-text">
+            <h3>丝路北道要塞：一条古道，两种文明</h3>
+            <p>
+              汉代“凿空西域”后，丝绸之路北道自长安出发，经陇山、固原进入宁夏平原，
+              再经灵州、中卫渡黄河，西出凉州衔接河西走廊。中卫因此兼具渡口、驿站与
+              卫所三重身份：白天商旅络绎，夜里烽燧相望，农耕文明与游牧文明在黄河两岸
+              反复相遇、彼此塑造，最终沉淀为今日中卫深厚的历史底色。
+            </p>
+          </div>
+          <div class="fk-seal" aria-hidden="true">北道咽喉<br>丝路中卫</div>
+        </div>
+      </div>
+
+      <!-- 时间轴 -->
+      <div class="timeline">
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <span class="tl-period">先秦至秦汉</span>
+          <h3>引黄开渠，牧地变沃野</h3>
+          <p>宁夏平原引黄灌溉传统可上溯至秦汉，秦渠、汉渠等古渠遗迹见证了农耕文明在河套绿洲的扎根。</p>
+        </article>
+        <article class="tl-item reveal reveal-d1">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <span class="tl-period">汉魏</span>
+          <h3>凿空西域，丝路初通</h3>
+          <p>汉通西域后，使者商旅经陇山古道进入宁夏，沿黄河渡口继续西行，中卫一带渐成北道必经之地。</p>
+        </article>
+        <article class="tl-item reveal reveal-d2">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <span class="tl-period">隋唐</span>
+          <h3>驼铃驿道，货通东西</h3>
+          <p>灵州道、回鹘路等驿道网络繁盛，钱币、织锦、陶瓷沿黄河两岸流转，渡口与驿站昼夜不息。</p>
+        </article>
+        <article class="tl-item reveal reveal-d3">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <span class="tl-period">明代</span>
+          <h3>卫所屯田，边墙锁钥</h3>
+          <p>明代设宁夏中卫，筑城屯田、修边墙烽燧，中卫成为兼顾军防与商贸的丝路北道重镇。</p>
+        </article>
+        <article class="tl-item reveal reveal-d4">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <span class="tl-period">当代</span>
+          <h3>文脉新篇，数字接力</h3>
+          <p>中卫市博物馆与青年志愿团队以数字化、研学与创意传播，让古道记忆走向新一代。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 板块二：馆藏珍宝 ==================== -->
+  <section class="section collection-section" id="collection">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">02 · 馆藏珍宝</span>
+        <h2>丝路馆藏 · <span class="grad-text underline-art">一眼千年</span></h2>
+        <p class="lead">
+          点击卡片，展开文物背后的历史背景。钱币、织锦、羊皮筏与边塞遗存，
+          共同构成中卫博物馆对丝路北道的系统讲述。
+        </p>
+      </div>
+
+      <div class="collection-intro reveal reveal-d1">
+        <p>
+          中卫博物馆依托地方考古发现与征集文物，集中展示汉唐丝路、黄河渡口、
+          西夏瓷韵与明清边塞等主题。以下四组展品为代表性展陈方向，完整内容以馆内展签为准。
+        </p>
+      </div>
+
+      <div class="collection-grid">
+        <article class="artifact-card reveal" data-tilt data-artifact="coin">
+          <div class="card-inner">
+            <span class="shine" aria-hidden="true"></span>
+            <div class="media-frame card-media">
+              <img src="images/collection-1.png" alt="丝路商队穿行沙漠" loading="lazy">
+              <span class="dynasty-tag">汉唐</span>
+            </div>
+            <div class="artifact-body">
+              <div class="artifact-tags"><span>钱币</span><span>贸易</span></div>
+              <h3>驼铃遗币</h3>
+              <p>五铢钱与开元通宝在渡口、驿站遗址中屡有出土，是丝路商旅往来最直接的物证。</p>
+              <div class="artifact-foot">
+                <span class="era">五铢钱 · 开元通宝</span>
+                <button class="artifact-open" data-artifact="coin" aria-haspopup="dialog">
+                  查看历史背景
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="artifact-card reveal reveal-d1" data-tilt data-artifact="silk">
+          <div class="card-inner">
+            <span class="shine" aria-hidden="true"></span>
+            <div class="media-frame card-media">
+              <img src="images/collection-2.png" alt="中国传统建筑的朱红宫墙与琉璃瓦" loading="lazy">
+              <span class="dynasty-tag">汉唐</span>
+            </div>
+            <div class="artifact-body">
+              <div class="artifact-tags"><span>织锦</span><span>纹样</span></div>
+              <h3>锦纹织梦</h3>
+              <p>联珠纹、胡旋舞等异域元素经丝路传入，织锦成为东西方美学交融的珍贵样本。</p>
+              <div class="artifact-foot">
+                <span class="era">联珠纹 · 织锦残片</span>
+                <button class="artifact-open" data-artifact="silk" aria-haspopup="dialog">
+                  查看历史背景
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="artifact-card reveal reveal-d2" data-tilt data-artifact="raft">
+          <div class="card-inner">
+            <span class="shine" aria-hidden="true"></span>
+            <div class="media-frame card-media">
+              <img src="images/collection-3.png" alt="黄河与沿岸的流动水波" loading="lazy">
+              <span class="dynasty-tag">黄河记忆</span>
+            </div>
+            <div class="artifact-body">
+              <div class="artifact-tags"><span>非遗</span><span>渡河</span></div>
+              <h3>筏影渡河</h3>
+              <p>整羊皮充气扎筏、顺流漂渡，羊皮筏子曾是黄河两岸最日常的渡河方式。</p>
+              <div class="artifact-foot">
+                <span class="era">羊皮筏子制作技艺</span>
+                <button class="artifact-open" data-artifact="raft" aria-haspopup="dialog">
+                  查看历史背景
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="artifact-card reveal reveal-d3" data-tilt data-artifact="pass">
+          <div class="card-inner">
+            <span class="shine" aria-hidden="true"></span>
+            <div class="media-frame card-media">
+              <img src="images/collection-4.png" alt="蜿蜒山脊上的明代长城与烽燧" loading="lazy">
+              <span class="dynasty-tag">明代</span>
+            </div>
+            <div class="artifact-body">
+              <div class="artifact-tags"><span>边塞</span><span>卫所</span></div>
+              <h3>关城锁钥</h3>
+              <p>明代卫所、边墙与烽燧，让中卫成为丝路北道上兼具军防与商贸的枢纽。</p>
+              <div class="artifact-foot">
+                <span class="era">宁夏中卫 · 边墙烽燧</span>
+                <button class="artifact-open" data-artifact="pass" aria-haspopup="dialog">
+                  查看历史背景
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 板块三：文脉传承 ==================== -->
+  <section class="section heritage-section" id="heritage">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">03 · 文脉传承</span>
+        <h2>中华文脉 · <span class="grad-text underline-art">青年接力</span></h2>
+        <p class="lead">
+          让文物在数字空间“活”起来，让青年在讲述中成为文脉的“接棒人”。
+          科技是新的渡口，青春是新的驼铃。
+        </p>
+      </div>
+
+      <div class="heritage-grid">
+        <div class="pathway-list">
+          <article class="pathway reveal">
+            <span class="pathway-num">01</span>
+            <div>
+              <h3>数字典藏</h3>
+              <p>高精度扫描与三维重建，让丝路文物跨越展柜，随时可查、可赏、可研究，也为偏远地区的青少年打开一扇云端之门。</p>
+            </div>
+          </article>
+          <article class="pathway reveal reveal-d1">
+            <span class="pathway-num">02</span>
+            <div>
+              <h3>青春讲解</h3>
+              <p>大学生志愿讲解队走进展区与社区，用青年语态讲述文物背后的历史、情感与当代意义，让讲解成为双向的文化对话。</p>
+            </div>
+          </article>
+          <article class="pathway reveal reveal-d2">
+            <span class="pathway-num">03</span>
+            <div>
+              <h3>文创活化</h3>
+              <p>提取联珠纹、古渡与羊皮筏子元素，让传统纹样进入徽章、书签、数字藏品与日常设计，让文脉走进生活。</p>
+            </div>
+          </article>
+          <article class="pathway reveal reveal-d3">
+            <span class="pathway-num">04</span>
+            <div>
+              <h3>新媒体传播</h3>
+              <p>短视频导览、线上展厅与互动内容，让丝路记忆抵达更远的年轻人群，在每一次转发中完成新的讲述。</p>
+            </div>
+          </article>
+        </div>
+
+        <aside class="dashboard reveal reveal-d2" id="dashboard">
+          <div class="dashboard-head">
+            <h3>数字文脉仪表盘</h3>
+            <span>行动愿景</span>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-head"><span>数字化馆藏覆盖率</span><b>82%</b></div>
+            <div class="bar-track"><div class="bar-fill" style="--w:82%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-head"><span>青少年研学课程</span><b>76%</b></div>
+            <div class="bar-track"><div class="bar-fill" style="--w:76%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-head"><span>志愿讲解队覆盖</span><b>68%</b></div>
+            <div class="bar-track"><div class="bar-fill" style="--w:68%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-head"><span>新媒体传播触达</span><b>91%</b></div>
+            <div class="bar-track"><div class="bar-fill" style="--w:91%"></div></div>
+          </div>
+
+          <div class="counter-row">
+            <div class="counter"><b><span data-count="36">0</span> 场</b><small>研学活动</small></div>
+            <div class="counter"><b><span data-count="120">0</span> 位</b><small>青年志愿者</small></div>
+            <div class="counter"><b><span data-count="8">0</span> 项</b><small>数字体验</small></div>
+            <div class="counter"><b><span data-count="15">0</span> 所</b><small>合作院校</small></div>
+          </div>
+
+          <p class="dashboard-note">数据为项目愿景示意，用于展示数字化传承方向</p>
+        </aside>
+      </div>
+
+      <blockquote class="quote-band reveal">
+        <p>文明因交流而多彩，文脉因青年而常新。黄河奔涌不息，丝路记忆便不止于陈列，而在于每一代人的接力。</p>
+        <small>—— 中华文脉延续行动 · 丝路古道上的中卫记忆</small>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ==================== 板块四：青年思考 · 文脉续写 ==================== -->
+  <section class="section thinking-section" id="thinking">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">04 · 青年思考</span>
+        <h2>文脉续写 · <span class="grad-text underline-art">由我开始</span></h2>
+        <p class="lead">
+          文物不是终点，而是起点。青年学生用数字科技与社会实践，
+          让丝路记忆从展柜走向课堂、走向屏幕、走向每一场真实的行走。
+        </p>
+      </div>
+
+      <div class="thinking-grid">
+        <div class="thinking-card g-border reveal">
+          <div class="card-title">
+            <h3>三个值得思考的问题</h3>
+            <span>展开对话</span>
+          </div>
+
+          <div class="qa-list">
+            <div class="qa-item open">
+              <button class="qa-question" aria-expanded="true">
+                为什么丝路记忆需要青年讲述？
+                <span class="qa-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="qa-answer">
+                <div class="qa-answer-inner">
+                  <p>
+                    历史如果只停留在展柜里，就只剩下“过去”；当青年用自己的语言重新讲述，
+                    它才与当下发生关联。数字时代的青年擅长图像、声音与互动表达，能够把文物
+                    背后的情感翻译给同龄人，让丝路记忆真正进入当代生活。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" aria-expanded="false">
+                数字科技如何让文物“活”起来？
+                <span class="qa-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="qa-answer">
+                <div class="qa-answer-inner">
+                  <p>
+                    三维扫描让脆弱的织物与钱币以毫米级精度永久保存；增强现实把文物放回
+                    它原本的渡口与驿道场景；线上展厅则打破地理边界，让偏远地区的孩子也能
+                    走近丝路。科技不是替代文物，而是延长文物的生命，扩大文物的听众。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" aria-expanded="false">
+                你能为家乡文脉做一件小事？
+                <span class="qa-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="qa-answer">
+                <div class="qa-answer-inner">
+                  <p>
+                    一次田野走访、一条口述史短视频、一份博物馆志愿讲解、一张传统纹样的
+                    再设计草稿，都可以成为文脉的续写。真正重要的不是做多大的事，而是让
+                    自己从“参观者”变成“参与者”。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="thinking-card g-border reveal reveal-d2">
+          <div class="write-panel">
+            <div class="wp-head">
+              <h3>我的文脉续写清单</h3>
+              <span class="progress" id="practiceProgress">今日行动 0 / 4</span>
+            </div>
+
+            <div class="practice-chips" id="practiceChips">
+              <button class="practice-chip" type="button"><span class="check" aria-hidden="true">✓</span>三维扫描</button>
+              <button class="practice-chip" type="button"><span class="check" aria-hidden="true">✓</span>短视频讲述</button>
+              <button class="practice-chip" type="button"><span class="check" aria-hidden="true">✓</span>云上展厅</button>
+              <button class="practice-chip" type="button"><span class="check" aria-hidden="true">✓</span>田野调查</button>
+            </div>
+
+            <div class="note-box">
+              <textarea id="youthNote" maxlength="120" aria-label="写下你的文脉续写" placeholder="写下你的思考：你想用怎样的方式，让家乡的丝路记忆被更多人看见？"></textarea>
+              <div class="note-meta">
+                <span class="count"><b id="noteCount">0</b> / 120 字</span>
+                <button class="save-note" id="saveNote" type="button">
+                  保存我的续写
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                </button>
+              </div>
+              <span class="stamp" id="saveStamp">已续写 · 文脉有你</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ==================== 馆藏弹窗 ==================== -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="关闭弹窗">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+    </button>
+    <div class="modal-hero">
+      <img id="modalImage" src="" alt="">
+      <div class="hero-title">
+        <small id="modalEra"></small>
+        <h3 id="modalTitle"></h3>
+      </div>
+    </div>
+    <div class="modal-content">
+      <div class="modal-tags" id="modalTags"></div>
+      <div id="modalBody"></div>
+      <p class="modal-highlight" id="modalHighlight"></p>
+      <p class="modal-footnote">内容依据中卫市博物馆公开展陈方向整理，具体文物信息以馆内展签与最新公告为准。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path>
+              <path d="m8.5 8.5 4-1.5 1.5 4-4 1.5z"></path>
+            </svg>
+          </span>
+          丝路印记 · 中卫文脉
+        </a>
+        <p>以黄河为墨、大漠为纸，在丝路古道上续写中华文脉的现代篇章。</p>
+      </div>
+
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="#home">首页</a>
+        <a href="#history">历史交汇</a>
+        <a href="#collection">馆藏珍宝</a>
+        <a href="#heritage">文脉传承</a>
+        <a href="#thinking">青年思考</a>
+      </nav>
+    </div>
+
+    <p class="footer-statement">
+      中华文脉延续行动·思政社会实践作业 | 宁夏中卫市博物馆主题展区
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"></path></svg>
+</button>
+
+<script>
+(function () {
+  "use strict";
+
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ============ 1. 导航、进度条、回到顶部 ============ */
+  const navbar = $("#navbar");
+  const navLinks = $("#navLinks");
+  const menuToggle = $("#menuToggle");
+  const toTop = $("#toTop");
+  const progress = $("#scrollProgress");
+
+  function updateChrome() {
+    const y = window.scrollY;
+    navbar.classList.toggle("scrolled", y > 30);
+    toTop.classList.toggle("show", y > 620);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
+  }
+
+  window.addEventListener("scroll", updateChrome, { passive: true });
+  updateChrome();
+
+  function setMenu(open) {
+    navLinks.classList.toggle("open", open);
+    menuToggle.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "关闭导航菜单" : "打开导航菜单");
+    document.body.classList.toggle("lock", open);
+  }
+
+  menuToggle.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+  $$(".nav-link", navLinks).forEach(link => link.addEventListener("click", () => setMenu(false)));
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  /* ============ 2. 导航高亮 ============ */
+  const sectionLinks = $$(".nav-link");
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = `#${entry.target.id}`;
+        sectionLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === id));
+      }
+    });
+  }, { rootMargin: "-38% 0px -55% 0px" });
+
+  ["home", "history", "collection", "heritage", "thinking"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  /* ============ 3. 滚动入场 ============ */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+
+  $$(".reveal").forEach(el => revealObserver.observe(el));
+
+  /* ============ 4. 仪表盘进度条与计数 ============ */
+  const dashboard = $("#dashboard");
+  if (dashboard) {
+    const dashObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          dashboard.classList.add("in-view");
+          dashObserver.unobserve(dashboard);
+          $$("[data-count]", dashboard).forEach(runCounter);
+        }
+      });
+    }, { threshold: 0.32 });
+    dashObserver.observe(dashboard);
+  }
+
+  function runCounter(el) {
+    const target = Number(el.dataset.count);
+    const duration = 1300;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ============ 5. 打字机 ============ */
+  const typeText = $("#typeText");
+  const phrases = [
+    "驼铃自北道而来，在黄河渡口歇脚。",
+    "羊皮筏子载过岁月，也载着中卫的丝路记忆。",
+    "让文物开口说话，让青年接力续写文脉。"
+  ];
+
+  if (reducedMotion) {
+    typeText.textContent = phrases[0];
+  } else {
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      const current = phrases[phraseIndex];
+      if (!deleting) {
+        charIndex++;
+        typeText.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(typeLoop, 2200);
+          return;
+        }
+        setTimeout(typeLoop, 82);
+      } else {
+        charIndex--;
+        typeText.textContent = current.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+        setTimeout(typeLoop, 34);
+      }
+    }
+    setTimeout(typeLoop, 400);
+  }
+
+  /* ============ 6. 卡片 3D 悬浮 ============ */
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  $$("[data-tilt]").forEach(card => {
+    if (!finePointer) return;
+
+    card.addEventListener("pointermove", e => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      card.style.setProperty("--rx", `${(py - 0.5) * -8}deg`);
+      card.style.setProperty("--ry", `${(px - 0.5) * 10}deg`);
+      card.style.setProperty("--gx", `${px * 100}%`);
+      card.style.setProperty("--gy", `${py * 100}%`);
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+      card.style.setProperty("--gx", "50%");
+      card.style.setProperty("--gy", "50%");
+    });
+  });
+
+  /* ============ 7. 馆藏弹窗 ============ */
+  const artifactData = {
+    coin: {
+      image: "images/collection-1.png",
+      era: "汉唐 · 丝路贸易货币",
+      title: "驼铃遗币",
+      tags: ["五铢钱", "开元通宝", "渡口遗址"],
+      body: [
+        "在丝绸之路北道上，钱币是比驼铃更沉默的见证者。西汉五铢钱通行于汉帝国与西域之间，唐代开元通宝则随着商队进入更远的绿洲城市。中卫沿黄渡口与古驿道遗址中发现的历代钱币，记录了货物交割、税赋通关与民间贸易的日常。",
+        "一枚磨损的钱币，往往就是一段旅程的缩影：它可能从长安的市坊出发，经过萧关古道，在中卫渡口换过一批粮食，又随驼队西去凉州。透过这些锈迹与刻痕，青年研究者可以还原丝路经济网络的真实肌理。"
+      ],
+      highlight: "货币无言，却记录了渡口边每一次真实的交换。"
+    },
+    silk: {
+      image: "images/collection-2.png",
+      era: "汉唐 · 丝路织物与纹样",
+      title: "锦纹织梦",
+      tags: ["联珠纹", "织锦", "跨文化传播"],
+      body: [
+        "丝路不仅运送丝绸，也运送纹样与审美。联珠纹从波斯、粟特地区传入，与中原的云气纹、动物纹交织，形成唐锦标志性的“丝路风格”；宁夏境内出土的丝织物与石刻中，还能看到胡旋舞、对兽纹等异域元素。",
+        "中卫博物馆展陈中的织物残片与服饰文物，颜色虽已褪去，经纬却依然清晰，是研究唐代织造工艺与东西方文化传播的珍贵标本。它们提醒我们：所谓“中国风”，从来都生长在开放与交流之中。"
+      ],
+      highlight: "一匹锦的经纬之间，织着东西方相遇的图谱。"
+    },
+    raft: {
+      image: "images/collection-3.png",
+      era: "黄河记忆 · 非物质文化遗产",
+      title: "筏影渡河",
+      tags: ["羊皮筏子", "黄河航运", "非遗技艺"],
+      body: [
+        "羊皮筏子古称“革船”，以整张羊皮脱毛、灌油、扎口、吹气，十余只皮胎排列捆扎，即可载人载货顺流而下。在木船难造、桥梁稀缺的年代，它是最适应黄河水文的渡河工具。",
+        "中卫、兰州等沿黄城市都曾以筏运为生，筏工在急流中放筏如飞，形成独特的黄河航运文化。今天，羊皮筏子制作技艺被列入非物质文化遗产，沙坡头旅游区的筏工仍在延续这门水上技艺。"
+      ],
+      highlight: "千年筏子百年桥，一只皮筏，就是一段流动的黄河史。"
+    },
+    pass: {
+      image: "images/collection-4.png",
+      era: "明代 · 边塞遗存",
+      title: "关城锁钥",
+      tags: ["宁夏中卫", "边墙烽燧", "卫所屯田"],
+      body: [
+        "明代在宁夏设卫屯田，中卫因扼守黄河渡口、拱卫河西走廊而被设为军事卫所，史称“宁夏中卫”。卫城、边墙与烽燧构成了严密的防御体系，也保护着驿道商旅的安全。",
+        "中卫高庙等明清建筑群保存至今，砖雕、彩绘与殿阁格局兼具军事与民俗色彩；博物馆内收藏的甲胄、铜器、戍边器物等文物，则从另一个侧面讲述着边城日常——白天商旅络绎，夜里烽燧相望。"
+      ],
+      highlight: "边墙锁钥，锁住的不是往来，而是丝路北道的平安。"
+    }
+  };
+
+  const backdrop = $("#modalBackdrop");
+  const closeBtn = $("#modalClose");
+  const modalImage = $("#modalImage");
+  const modalEra = $("#modalEra");
+  const modalTitle = $("#modalTitle");
+  const modalTags = $("#modalTags");
+  const modalBody = $("#modalBody");
+  const modalHighlight = $("#modalHighlight");
+  let lastFocus = null;
+
+  function openModal(key) {
+    const data = artifactData[key];
+    if (!data) return;
+    lastFocus = document.activeElement;
+    modalImage.src = data.image;
+    modalImage.alt = data.title;
+    modalEra.textContent = data.era;
+    modalTitle.textContent = data.title;
+    modalTags.innerHTML = data.tags.map(t => `<span>${t}</span>`).join("");
+    modalBody.innerHTML = data.body.map(p => `<p>${p}</p>`).join("");
+    modalHighlight.textContent = data.highlight;
+    backdrop.hidden = false;
+    requestAnimationFrame(() => backdrop.classList.add("open"));
+    document.body.classList.add("lock");
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    backdrop.classList.remove("open");
+    document.body.classList.remove("lock");
+    setTimeout(() => { backdrop.hidden = true; }, 300);
+    if (lastFocus) lastFocus.focus();
+  }
+
+  $$(".artifact-open").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      openModal(btn.dataset.artifact);
+    });
+  });
+
+  $$(".artifact-card").forEach(card => {
+    card.addEventListener("click", e => {
+      if (e.target.closest(".artifact-open")) return;
+      openModal(card.dataset.artifact);
+    });
+    card.addEventListener("keydown", e => {
+      if ((e.key === "Enter" || e.key === " ") && e.target === card) {
+        e.preventDefault();
+        openModal(card.dataset.artifact);
+      }
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", e => {
+    if (e.target === backdrop) closeModal();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !backdrop.hidden) closeModal();
+  });
+
+  /* ============ 8. 青年思考交互 ============ */
+  $$(".qa-question").forEach(q => {
+    q.addEventListener("click", () => {
+      const item = q.closest(".qa-item");
+      const isOpen = item.classList.contains("open");
+      $$(".qa-item").forEach(i => {
+        i.classList.remove("open");
+        $(".qa-question", i).setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        q.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  const chips = $$(".practice-chip");
+  const practiceProgress = $("#practiceProgress");
+
+  function updateProgress() {
+    const done = chips.filter(c => c.classList.contains("active")).length;
+    practiceProgress.textContent = `今日行动 ${done} / ${chips.length}`;
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      chip.classList.toggle("active");
+      updateProgress();
+    });
+  });
+
+  const note = $("#youthNote");
+  const noteCount = $("#noteCount");
+  const saveNote = $("#saveNote");
+  const saveStamp = $("#saveStamp");
+
+  note.addEventListener("input", () => {
+    noteCount.textContent = note.value.length;
+    saveStamp.classList.remove("show");
+  });
+
+  saveNote.addEventListener("click", () => {
+    try {
+      localStorage.setItem("zw-youth-note", note.value);
+    } catch (err) {
+      /* 本地存储不可用时仍展示反馈 */
+    }
+    saveStamp.classList.add("show");
+    saveStamp.textContent = "已续写 · 文脉有你";
+  });
+
+  try {
+    const saved = localStorage.getItem("zw-youth-note");
+    if (saved) {
+      note.value = saved;
+      noteCount.textContent = saved.length;
+      saveStamp.classList.add("show");
+      saveStamp.textContent = "已续写 · 欢迎继续修改";
+    }
+  } catch (err) {
+    /* 忽略读取失败 */
+  }
+
+  /* ============ 9. 图片失败优雅降级 ============ */
+  $$("img").forEach(img => {
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+      const frame = img.closest(".media-frame, .photo-tile, .modal-hero");
+      if (frame) frame.classList.add("no-img");
+    }, { once: true });
+  });
+
+  /* ============ 10. 英雄区金尘粒子 ============ */
+  const canvas = $("#dustCanvas");
+  const ctx = canvas.getContext("2d");
+  let W = 0;
+  let H = 0;
+  let time = 0;
+  let particles = [];
+  let rafId = null;
+  let running = true;
+
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth;
+    H = canvas.clientHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.max(22, Math.min(64, Math.floor(W / 18)));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 0.7 + Math.random() * 1.8,
+      speed: 0.06 + Math.random() * 0.24,
+      drift: (Math.random() - 0.5) * 0.2,
+      phase: Math.random() * Math.PI * 2
+    }));
+    if (reducedMotion) drawParticles();
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.y -= p.speed;
+      p.x += Math.sin(time * 0.5 + p.phase) * 0.1 + p.drift;
+      p.phase += 0.008;
+      if (p.y < -12) {
+        p.y = H + 12;
+        p.x = Math.random() * W;
+      }
+      const flicker = 0.3 + 0.25 * Math.sin(time * 2 + p.phase);
+      ctx.fillStyle = `rgba(255,225,160,${Math.max(0.05, flicker).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function loop() {
+    if (!running) {
+      rafId = null;
+      return;
+    }
+    time += 0.016;
+    drawParticles();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  window.addEventListener("resize", resizeCanvas, { passive: true });
+  resizeCanvas();
+
+  if (!reducedMotion) {
+    const heroObserver = new IntersectionObserver(entries => {
+      running = entries[0].isIntersecting;
+      if (running && rafId === null) loop();
+    }, { threshold: 0.04 });
+    heroObserver.observe(canvas);
+  }
+})();
+</script>
+</body>
+</html>

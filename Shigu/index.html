@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石鼓书院 - 千年湖湘文脉圣地</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: "Microsoft YaHei", "SimSun", "STSong", serif;
+            background: linear-gradient(#f5efe0, #f0e6d2, #e9dcc8);
+            background-attachment: fixed;
+            color: #2c2416;
+            line-height: 2.1;
+        }
+        header {
+            background: linear-gradient(135deg, #5e1810, #8c2318);
+            color: #f8f3e6;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: 0 6px 18px rgba(90, 20, 10, 0.25);
+            border-bottom: 4px solid #d4b886;
+            position: relative;
+        }
+        header::after{
+            content:"";
+            position:absolute;
+            width:80%;
+            height:1px;
+            background:rgba(212,184,134,0.4);
+            bottom:20px;
+            left:10%;
+        }
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            letter-spacing: 8px;
+            font-weight: normal;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            letter-spacing: 3px;
+        }
+        nav {
+            background-color: #701c12;
+            border-bottom: 2px solid #c9ad7c;
+            position:sticky;
+            top:0;
+            z-index:99;
+        }
+        .nav-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-item {
+            padding: 18px 26px;
+            color: #f8f3e6;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-item:hover {
+            background-color: #50120b;
+            color: #f0d9b5;
+        }
+        .nav-item.active {
+            background-color: #50120b;
+            color: #f0d9b5;
+            border-bottom: 5px solid #d4b886;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 25px;
+        }
+        .tab-page {
+            background-color: #fffaf0;
+            padding: 45px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(44, 36, 22, 0.15);
+            border: 1px solid #e8d9c0;
+            display: none;
+        }
+        .tab-page.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab-page h2 {
+            color: #6b1c12;
+            border-left: 7px solid #8c2318;
+            padding-left: 18px;
+            margin-bottom: 28px;
+            font-size: 1.7rem;
+            letter-spacing: 4px;
+            font-weight: normal;
+        }
+        .tab-page p {
+            font-size: 1.08rem;
+            text-indent: 2em;
+            margin-bottom: 20px;
+            color: #3a3122;
+        }
+        .tab-page ul {
+            padding-left: 35px;
+            margin: 25px 0;
+        }
+        .tab-page li {
+            margin-bottom: 16px;
+            font-size: 1.08rem;
+            color: #3a3122;
+        }
+        strong {
+            color: #8c2318;
+        }
+        .img-wrap{
+            margin:28px 0;
+            text-align:center;
+        }
+        .img-wrap img{
+            max-width:100%;
+            border-radius:12px;
+            border:2px solid #ddc9a8;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+            filter:sepia(15%);
+        }
+        .img-wrap img:hover{
+            transform: scale(1.015);
+            filter:sepia(0%);
+        }
+        .img-caption{
+            font-size:0.92rem;
+            color:#70624c;
+            margin-top:10px;
+        }
+
+        /* ========== 通用两栏容器 ========== */
+        .two-col{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:32px;
+            align-items:center;
+            margin:30px 0;
+        }
+        @media(max-width:768px){
+            .two-col{
+                grid-template-columns:1fr;
+            }
+        }
+
+        .poem-row{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap:25px;
+            margin:35px 0;
+        }
+        @media(max-width:720px){
+            .poem-row{
+                grid-template-columns:1fr;
+            }
+        }
+        .poem-card{
+            padding:28px;
+            background:#f7efe0;
+            border-radius:14px;
+            border:1px solid #e2d0b4;
+            border-left:8px solid #b88c5c;
+            transition:0.3s;
+        }
+        .poem-card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 8px 14px rgba(0,0,0,0.08);
+        }
+        .poem-card h4{
+            color:#8c2318;
+            margin-bottom:15px;
+            font-size:1.15rem;
+            text-indent:0;
+            text-align:center;
+            letter-spacing:2px;
+        }
+        .poem-line{
+            width:80%;
+            height:1px;
+            background:#d4c2a4;
+            margin:12px auto;
+        }
+        .poem-text{
+            font-family:"SimSun",serif;
+            font-size:1.1rem;
+            text-align:center;
+            line-height:2.2;
+            color:#443828;
+        }
+        .poem-author{
+            text-align:right;
+            font-size:0.95rem;
+            color:#80725c;
+            margin-top:10px;
+        }
+
+        /* 名士板块人物卡片 */
+        .figure-card-wrap{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+            margin-top:30px;
+        }
+        .figure-card{
+            background:#f7efe0;
+            padding:22px;
+            border-radius:12px;
+            border:1px solid #e2d0b4;
+            transition:0.3s;
+        }
+        .figure-card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 8px 14px rgba(0,0,0,0.08);
+        }
+        .figure-card h4{
+            color:#8c2318;
+            margin-bottom:8px;
+            text-indent:0;
+        }
+        .figure-card .quote{
+            font-size:0.94rem;
+            color:#705c48;
+            margin-top:8px;
+            font-style:italic;
+        }
+        @media(max-width:720px){
+            .figure-card-wrap{
+                grid-template-columns:1fr;
+            }
+        }
+
+        /* 沿革时间轴 */
+        .timeline{
+            border-left:3px solid #b88c5c;
+            padding-left:24px;
+            margin:20px 0;
+        }
+        .timeline-item{
+            margin-bottom:22px;
+            position:relative;
+        }
+        .timeline-item::before{
+            content:"";
+            width:12px;
+            height:12px;
+            border-radius:50%;
+            background:#8c2318;
+            position:absolute;
+            left:-30px;
+            top:6px;
+        }
+        .timeline-year{
+            font-weight:bold;
+            color:#8c2318;
+        }
+
+        /* 引用块 */
+        .quote-block{
+            background:#f3e9d7;
+            padding:22px 26px;
+            border-radius:10px;
+            margin:26px 0;
+            border-left:6px solid #a87c4e;
+        }
+        .quote-block p{
+            text-indent:0;
+            font-style:italic;
+            color:#5c4b38;
+        }
+
+        /* 小信息卡片组 */
+        .info-card-group{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:18px;
+            margin:24px 0;
+        }
+        .info-card{
+            background:#f7efe0;
+            padding:18px;
+            border-radius:10px;
+            border:1px solid #e2d0b4;
+        }
+        .info-card h5{
+            color:#8c2318;
+            font-size:1.05rem;
+            margin-bottom:8px;
+            text-indent:0;
+        }
+        @media(max-width:720px){
+            .info-card-group{
+                grid-template-columns:1fr;
+            }
+        }
+
+        .scroll-box{
+            margin-top:40px;
+            padding:30px;
+            background:#f9f1e3;
+            border-radius:14px;
+            border:1px solid #ddc9a8;
+            background-image: linear-gradient(rgba(249,241,227,0.92),rgba(249,241,227,0.92));
+            background-size:cover;
+        }
+        .scroll-box h3{
+            color:#8c2318;
+            margin-bottom:16px;
+            font-size:1.25rem;
+            text-indent:0;
+            font-weight:normal;
+        }
+        textarea{
+            width:100%;
+            height:200px;
+            padding:18px;
+            border:1px solid #ccb89b;
+            border-radius:10px;
+            background:#fffbf2;
+            font-size:1.05rem;
+            color:#333;
+            resize:none;
+            outline:none;
+            font-family:"SimSun",serif;
+        }
+        .btn-group{
+            margin-top:18px;
+            display:flex;
+            gap:16px;
+        }
+        button{
+            padding:9px 24px;
+            border:none;
+            border-radius:7px;
+            background:#8c2318;
+            color:#fff;
+            font-size:1rem;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        button:hover{
+            background:#6b1c12;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>石 鼓 书 院</h1>
+        <p>千年三江学府 · 湖湘文脉源头 · 四大书院名宗</p>
+    </header>
+
+    <nav>
+        <div class="nav-wrap">
+            <a href="../index.html" class="nav-item">返回</a>
+            <div class="nav-item active" data-tab="intro">书院简介</div>
+            <div class="nav-item" data-tab="history">千年沿革</div>
+            <div class="nav-item" data-tab="people">名士流芳</div>
+            <div class="nav-item" data-tab="scenery">建筑盛景</div>
+            <div class="nav-item" data-tab="culture">文化底蕴</div>
+            <div class="nav-item" data-tab="inherit">文化赓续</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 【1 书院简介】布局：图在上，文字在下，底部诗词双卡片 +引用块 -->
+        <div class="tab-page show" id="intro">
+            <h2>书院简介 · 三江毓秀 千年书香</h2>
+            <div class="img-wrap">
+                <img src="images/images1.jpg" alt="石鼓书院全景">
+                <div class="img-caption">石鼓书院 · 三江汇流之地</div>
+            </div>
+            <div class="quote-block">
+                <p>“石鼓据蒸湘之会，江流环带，最为一郡佳处。”——《衡州府志》</p>
+            </div>
+            <p>石鼓书院坐落于湖南衡阳城北的石鼓山，湘江、蒸水、耒水三条江河在此交汇奔涌，山石临江耸立，江雾朝夕缭绕，得天独厚的山水环境，造就了这座闻名天下的古书院。书院始建于唐代元和五年，距今已有一千二百余年的岁月，是我国历史上创办时间较早的官私结合的书院，位列宋代“天下四大书院”，也是湖湘文化最早的重要发源地。</p>
+            <p>不同于大多坐落于深山密林之间的书院，石鼓书院直接屹立于江水之畔，登高即可俯瞰浩浩三江，江风穿亭而过，山水与人文融为一体。千百年间，书院历经战火浩劫，楼阁多次倾毁，却总被一代代士人、地方官员重新修葺复建。屋舍虽屡兴屡废，但崇文重教、传道育人的精神从未断绝。四方士子负笈而来，文人墨客登临题咏，留下浩如烟海的诗文碑刻，也让石鼓书院收获了“江山书院第一流”的美誉。</p>
+            <p>在漫长的古代，这里不仅是读书应试的学堂，更是思辨论道、传播思想的学术阵地。理学思想在此传播，家国情怀在此孕育，深深影响了整个湘南地区的民风教化，也为后世留存下极为珍贵的文化遗产。</p>
+            <div class="poem-row">
+                <div class="poem-card">
+                    <h4>咏石鼓书院</h4>
+                    <div class="poem-line"></div>
+                    <div class="poem-text">
+                        石鼓苍苍大江畔，<br>
+                        千年弦诵未曾残。<br>
+                        三江流水悠悠去，<br>
+                        留得书香满衡峦。
+                    </div>
+                    <div class="poem-author">—— 后人咏怀</div>
+                </div>
+                <div class="poem-card">
+                    <h4>治学箴言</h4>
+                    <div class="poem-line"></div>
+                    <div class="poem-text">
+                        为学之道，莫先于穷理；<br>
+                        穷理之要，必先于读书。
+                    </div>
+                    <div class="poem-author">—— 朱熹</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 【2 千年沿革】布局：左图 右时间轴（代替普通列表） -->
+        <div class="tab-page" id="history">
+            <h2>千年沿革 · 岁月更迭 文脉不息</h2>
+            <div class="two-col">
+                <div class="img-wrap" style="margin:0;">
+                    <img src="images/images2.jpg">
+                    <div class="img-caption">古代书院讲学图景</div>
+                </div>
+                <div>
+                    <p>石鼓书院千余年的发展史，也是一部古代书院兴衰沉浮的缩影。它从民间隐居讲学起步，一步步得到朝廷认可。</p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">唐·元和年间</div>
+                            <div>处士李宽筑室石鼓山，开民间讲学，书院由此肇始。</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">北宋·景祐二年</div>
+                            <div>朝廷御赐“石鼓书院”匾额，划拨学田，跻身天下四大书院。</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">南宋</div>
+                            <div>朱熹、张栻到此讲学，理学兴盛，成为南方理学传播重镇。</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">元‑明</div>
+                            <div>屡遭兵燹损毁，地方官府多次重修，订立学规，延续弦歌。</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">清代</div>
+                            <div>藏书日丰，广纳湘南学子，成为湘南教化中心。</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">抗战‑当代</div>
+                            <div>1944年衡阳会战书院建筑尽毁；2006年原址复原重建。</div>
+                        </div>
+                    </div>
+                    <p>建筑可以被战火摧毁，但崇文向学的精神代代传承。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 【3 名士流芳】布局：文字在上，图片居中，下方双人物卡片，增加名言摘录 -->
+        <div class="tab-page" id="people">
+            <h2>名士流芳 · 大儒云集 英才辈出</h2>
+            <p>石鼓山临江风景绝佳，加上书院讲学之风兴盛，千百年间，无数历史名人在这里留下足迹。有的在此开坛布道，传播思想；有的少年在此苦读，积淀学识；有的游历到此，挥毫写下传世诗文。先贤的思想风骨，沉淀为石鼓书院精神内核的重要部分。</p>
+            <div class="img-wrap">
+                <img src="images/images3.jpg">
+                <div class="img-caption">历代先贤与书院文脉传承</div>
+            </div>
+            <div class="figure-card-wrap">
+                <div class="figure-card">
+                    <h4>李宽｜开山之祖</h4>
+                    <p style="text-indent:0;margin-bottom:0;">唐代隐士，不求仕途，石鼓山筑屋授徒，开启书院千年序幕。</p>
+                    <div class="quote">“不求闻达，以道授徒。”</div>
+                </div>
+                <div class="figure-card">
+                    <h4>朱熹｜理学大家</h4>
+                    <p style="text-indent:0;margin-bottom:0;">亲临书院讲学，传播理学，重塑书院治学风气。</p>
+                    <div class="quote">“为学之道，莫先于穷理。”</div>
+                </div>
+                <div class="figure-card">
+                    <h4>张栻｜湖湘学派</h4>
+                    <p style="text-indent:0;margin-bottom:0;">倡导经世致用，知行合一，塑造湖湘士人精神。</p>
+                    <div class="quote">“士不可以不弘毅，仁以为己任。”</div>
+                </div>
+                <div class="figure-card">
+                    <h4>王夫之｜一代思想巨匠</h4>
+                    <p style="text-indent:0;margin-bottom:0;">少年求学石鼓，家国气节与思辨影响后世深远。</p>
+                    <div class="quote">“以身任天下，生死而不渝。”</div>
+                </div>
+            </div>
+            <p style="margin-top:24px;">韩愈、柳宗元、范成大、文天祥等，亦登临石鼓，留下大量诗文篇章。他们或感怀山水，或寄寓家国，丰富了石鼓的文学底蕴。</p>
+        </div>
+
+        <!-- 【4 建筑盛景】布局：大图‑文字‑双栏信息卡片穿插 -->
+        <div class="tab-page" id="scenery">
+            <h2>建筑盛景 · 古建临江 亭台揽胜</h2>
+            <div class="img-wrap">
+                <img src="images/images4.jpg">
+                <div class="img-caption">石鼓书院大观楼</div>
+            </div>
+            <p>当代复建的石鼓书院严格参考明清时期的建筑形制，依山就势，顺着石鼓山的地势层层铺展。黛瓦飞檐，木柱回廊，白墙木构，既有古代学府庄重肃穆的气质，又融合江南园林的雅致灵动。建筑群与脚下奔腾的三江相互映衬，形成国内少有的“临江书院”独特风貌。</p>
+            <div class="info-card-group">
+                <div class="info-card">
+                    <h5>大观楼【讲堂·藏书】</h5>
+                    <p style="text-indent:0;margin-bottom:0;">书院主体楼阁，登高俯瞰三江，昔日讲学藏书之所。</p>
+                </div>
+                <div class="info-card">
+                    <h5>合江亭【观江怀古】</h5>
+                    <p style="text-indent:0;margin-bottom:0;">始建唐代，凭栏观三江汇流，历代文人题咏最多。</p>
+                </div>
+                <div class="info-card">
+                    <h5>武侯祠 · 李忠节公祠【祠祀】</h5>
+                    <p style="text-indent:0;margin-bottom:0;">敬奉先贤忠义气节，体现书院德育教化传统。</p>
+                </div>
+                <div class="info-card">
+                    <h5>禹碑亭·碑廊【金石遗存】</h5>
+                    <p style="text-indent:0;margin-bottom:0;">复刻历代碑刻诗文，保存千百年笔墨实物。</p>
+                </div>
+            </div>
+            <p>整座书院建筑顺着山势错落排布，亭、祠、楼、廊互相呼应，人文建筑与自然山水完美相融，走到每一处都可以眺望江水，体会古人读书观景的意境。</p>
+        </div>
+
+        <!-- 【5 文化底蕴】布局：左文字，右图片；增加引用块+小对比卡片 -->
+        <div class="tab-page" id="culture">
+            <h2>文化底蕴 · 文脉赓续 泽被湖湘</h2>
+            <div class="two-col">
+                <div>
+                    <p>石鼓书院的价值，早已超出一组古建筑本身。它是湖湘文化形成与发展过程当中极为重要的一环，与岳麓书院一南一北相互呼应，共同构筑起湖湘文化厚重的精神底色。</p>
+                    <div class="quote-block">
+                        <p>“湖湘学者，务实践，重气节，经世而致用。”</p>
+                    </div>
+                    <p>千百年以来，书院之内碑刻林立，诗词文赋浩若烟海。名士讲学留下的讲义，学子诵读写下的篇章，官员重修书院撰写的碑记，大量文字被镌刻于石碑之上。这些遗存不只是文学作品，更是研究古代书院制度、湘南地域社会、理学传播历程珍贵的实物史料。</p>
+                    <div class="info-card-group">
+                        <div class="info-card">
+                            <h5>核心精神：勤学·明理</h5>
+                            <p style="text-indent:0;margin:0;">博览典籍，探求义理，明辨是非善恶。</p>
+                        </div>
+                        <div class="info-card">
+                            <h5>核心精神：笃行·济世</h5>
+                            <p style="text-indent:0;margin:0;">躬身实践，心怀家国，关切民生世事。</p>
+                        </div>
+                    </div>
+                    <p>时代变迁，书院早已不再是古代的学堂。但作为文化地标，它承载着历史记忆，供后人与先贤跨越时空对话。</p>
+                </div>
+                <div class="img-wrap" style="margin:0;">
+                    <img src="images/images5.jpg">
+                    <div class="img-caption">古籍碑刻中承载的千年文脉</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 【6 文化赓续】布局：通栏大图，文字列表，拓展阅读卡片，底部卷轴模块 -->
+        <div class="tab-page" id="inherit">
+            <h2>文化赓续 · 传承古院文脉</h2>
+            <div class="img-wrap">
+                <img src="images/images6.jpg">
+                <div class="img-caption">文脉绵延，薪火相传</div>
+            </div>
+            <p>传承千年书院文脉，并不只限于参观古迹、欣赏亭台楼阁。真正的传承，是读懂藏在碑刻山水背后的精神内核。回望先贤往事，传统文化的赓续，既在于研读典籍感悟历史，也落在当代人的日常修养与实践之中。</p>
+            <ul>
+                <li><strong>阅文知史</strong>：品读石鼓书院留存的诗文、碑记与学规，体会古人读书治学的理想。</li>
+                <li><strong>涵泳自省</strong>：从先贤身上汲取勤学自律、心怀家国的品格养分。</li>
+                <li><strong>登临感怀</strong>：实地走进石鼓书院，切身感受山水人文交融的意境。</li>
+                <li><strong>述古传今</strong>：讲述石鼓书院千年故事，让更多人看见这份历史记忆。</li>
+            </ul>
+            <div class="info-card">
+                <h5>📖 拓展阅读</h5>
+                <p style="text-indent:0;margin-bottom:0;">可研读《石鼓书院志》、历代碑拓、衡州地方志，进一步了解书院制度与湖湘理学发展脉络。</p>
+            </div>
+            <p>江水奔流不息，书卷代代相传。千年书院留给我们的，不仅是一处风景，更是一份厚重的精神馈赠。</p>
+            <div class="scroll-box">
+                <h3>感古抒怀</h3>
+                <textarea id="ideaArea" placeholder="观千年书院之遗存，有所思、有所感，可于此记述心怀……"></textarea>
+                <div class="btn-group">
+                    <button id="clearBtn">拭简重书</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const tabPages = document.querySelectorAll('.tab-page');
+        navItems.forEach(item=>{
+            item.addEventListener('click',()=>{
+                navItems.forEach(i=>i.classList.remove('active'));
+                tabPages.forEach(p=>p.classList.remove('show'));
+                item.classList.add('active');
+                const tid = item.getAttribute('data-tab');
+                document.getElementById(tid).classList.add('show');
+            })
+        })
+        document.getElementById('clearBtn').addEventListener('click',function(){
+            document.getElementById('ideaArea').value = '';
+        })
+    </script>
+</body>
+</html>

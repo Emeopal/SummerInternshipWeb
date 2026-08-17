@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铜镜文化赓续</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* ========== 导航栏样式（完全复用你原有代码） ========== */
+        .nav-wrap{
+            position: relative;
+            padding: 28px 60px 10px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(245,236,226,0));
+        }
+        /* 顶部两角淡米色斜角装饰 */
+        .nav-wrap::before,
+        .nav-wrap::after{
+            content: "";
+            position: absolute;
+            top:0;
+            width: 120px;
+            height: 38px;
+            background:#f7efe3;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            opacity: 0.9;
+        }
+        .nav-wrap::before{
+            left:0;
+        }
+        .nav-wrap::after{
+            right:0;
+            transform: scaleX(-1);
+        }
+
+        .nav-container{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 0 16px;
+            border-bottom: 1px solid #d8c8b8;
+        }
+        .title-main{
+            font-size: clamp(26px, 2.2vw, 42px);
+            line-height:1.2;
+            font-family:"SimSun",宋体,serif;
+            color:#8c1c1c;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+        .nav-list{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap: 10px 18px;
+            align-items:center;
+            width: 100%;
+        }
+        .nav-item{
+            font-size: clamp(16px, 1.3vw, 22px);
+            font-family:"SimSun",宋体,serif;
+            color:#8c1c1c;
+            text-decoration:none;
+            padding: 10px 22px;
+            border-radius: 999px;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(140, 28, 28, 0.18);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .nav-item:hover,
+        .nav-item:focus-visible{
+            border-color: rgba(140, 28, 28, 0.45);
+            background: rgba(184, 34, 34, 0.06);
+            transform: translateY(-1px);
+        }
+        .nav-item.active{
+            background:#b82222;
+            color:#ffffff;
+            box-shadow: 0 6px 16px rgba(184, 34, 34, 0.22);
+        }
+
+        body {
+            background: linear-gradient(180deg, #f8f1e7 0%, #fdfaf6 100%);
+            color: #2f241f;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 32px 20px 48px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #fffdfb 0%, #f3e5d4 100%);
+            padding: 56px 0 36px;
+            border-bottom: 1px solid rgba(140, 28, 28, 0.12);
+        }
+
+        .hero-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 36px;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-text {
+            flex: 1.2;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(40px, 4vw, 64px);
+            line-height: 1.1;
+            color: #7f1d1d;
+            margin-bottom: 12px;
+            letter-spacing: 0.06em;
+        }
+
+        .lead {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            max-width: 620px;
+        }
+
+        .hero-image {
+            flex: 0 0 38%;
+            max-width: 560px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 18px 38px rgba(94, 54, 21, 0.14);
+            border: 4px solid rgba(255,255,255,0.8);
+        }
+
+        .spot-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 26px 0;
+            padding: 22px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(160, 123, 91, 0.12);
+            border-radius: 22px;
+            box-shadow: 0 10px 24px rgba(60, 41, 26, 0.05);
+        }
+
+        .spot-section .img-wrap {
+            flex: 0 0 48%;
+            max-width: 48%;
+            height: 290px;
+            overflow: hidden;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #efe3d4 0%, #f8f3ec 100%);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spot-section .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .spot-section .text {
+            flex: 1;
+            padding: 8px 8px 8px 0;
+        }
+
+        .spot-section h2 {
+            font-size: clamp(28px, 2.2vw, 38px);
+            line-height: 1.35;
+            color: #7f1d1d;
+            margin-bottom: 12px;
+            font-family:"SimSun",宋体,serif;
+        }
+
+        .spot-section p {
+            font-size: 1.02rem;
+            line-height: 1.9;
+            color: #483a32;
+        }
+
+        .spot-section.alt {
+            flex-direction: row-reverse;
+        }
+
+        .spot-section.alt .text {
+            padding: 8px 0 8px 8px;
+        }
+
+        .spotlight-box {
+            justify-content: center;
+            padding: 26px 28px;
+            max-width: 980px;
+            margin: 26px auto;
+            background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(245,236,226,0.7));
+            border: 1.5px solid rgba(127, 29, 29, 0.25);
+            border-radius: 18px;
+            box-shadow: 0 12px 24px rgba(127, 29, 29, 0.08);
+        }
+
+        .spotlight-box .boxed-text {
+            width: min(100%, 820px);
+            padding: 12px 18px;
+            border: 1px solid rgba(127, 29, 29, 0.18);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.55);
+        }
+
+        @media (max-width: 900px) {
+            .hero-header,
+            .spot-section {
+                flex-direction: column;
+            }
+
+            .hero-image,
+            .spot-section .img-wrap {
+                width: 100%;
+                max-width: 100%;
+                flex-basis: auto;
+            }
+
+            .spot-section .img-wrap {
+                height: 260px;
+            }
+
+            .hero-image img {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container hero-header">
+            <div class="hero-text">
+                <h1>文化赓续</h1>
+                <p class="lead">古镜虽已褪去照容的实用功能，但青铜之上承载的审美、精神与记忆并未消散。从考古发掘到文创新生，古老铜镜在当代续写属于它的篇章。</p>
+                <nav class="nav-inline">
+                    <a class="btn" href="../index.html">首页</a>
+                </nav>
+            </div>
+            <div class="hero-image">
+                <img src="image/首页.png" alt="铜镜文化赓续">
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-wrap">
+        <div class="nav-container">
+            <div class="nav-list">
+                <a href="Page_1.html" class="nav-item">历史知识</a>
+                <a href="Page_2.html" class="nav-item">制作工艺</a>
+                <a href="Page_3.html" class="nav-item">使用途径</a>
+                <a href="Page_4.html" class="nav-item active">文化赓续</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="spot-section">
+            <div class="img-wrap">
+                <img src="image/修复铜镜.jpg" alt="铜镜考古发掘" />
+            </div>
+            <div class="text">
+                <h2>考古发掘：重见千年铜镜</h2>
+                <p>鄂州是我国著名的古铜镜出土地，大量战国、汉、三国两晋时期铜镜经由考古发掘重见天日。出土铜镜不只是一件件器物，更是解读古代手工业、商贸往来、社会信仰的实物史料。考古工作对铜镜进行清理、修复、整理著录，让埋藏地下千百年的纹饰与铭文重新被世人看见，为后世研究保存珍贵物证。</p>
+            </div>
+        </section>
+
+        <section class="spot-section alt">
+            <div class="img-wrap">
+                <img src="image/展览.png" alt="博物馆展陈">
+            </div>
+            <div class="text">
+                <h2>博物馆展陈：文明的公开诉说</h2>
+                <p>各地博物馆将铜镜作为重要馆藏对外展出。鄂州出土的多面精品铜镜陈列于展厅之中，观众可以近距离观察镜钮、地纹、神兽、花鸟纹样。实物展览打破古籍文字的隔阂，普通大众得以直观感受青铜铸造艺术的魅力，古铜镜从地下文物转变为面向公众的文化载体。</p>
+            </div>
+        </section>
+
+        <section class="spot-section">
+            <div class="img-wrap">
+                <img src="image/文创.png" alt="铜镜文创创新">
+            </div>
+            <div class="text">
+                <h2>文创转化：古老符号走向现代生活</h2>
+                <p>如今铜镜纹样被提取出来，衍生出书签、徽章、复刻小镜、海报等各类文创产品。不再用于照面，但是山字纹、神兽纹、花鸟纹这些经典视觉符号，融入现代人的日常。传统审美脱离古墓葬，以轻巧鲜活的形式继续流传，实现传统文化的创造性转化。</p>
+            </div>
+        </section>
+
+        <section class="spot-section alt spotlight-box">
+            <div class="text boxed-text">
+                <h2>当代赓续：记忆永不蒙尘</h2>
+                <p>铜镜早已退出实用舞台，但它承载的内涵依旧延续。学术研究不断梳理铜镜的时代脉络；实地调研、研学参观让青年走近本土文物；网络传播让鄂州铜镜走出地域限制。鉴物知史，一面古镜照见的不只是古人容颜，更是代代相传的东方文化精神。</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

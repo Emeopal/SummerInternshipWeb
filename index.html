@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岁月人文博览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "SimSun", serif;
+        }
+        body {
+            background-image: url("背景.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            padding: 60px 15px;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at top left, rgba(194,145,75,0.18), transparent 20%),
+                radial-gradient(circle at bottom right, rgba(92,58,33,0.16), transparent 25%),
+                linear-gradient(rgba(253,249,240,0.82), rgba(246,238,224,0.9));
+            z-index: -1;
+        }
+        .wrap {
+            max-width: 1020px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-out;
+            background: rgba(255, 250, 242, 0.36);
+            border: 1px solid rgba(155, 117, 67, 0.18);
+            border-radius: 30px;
+            padding: 46px 36px 30px;
+            box-shadow: 0 20px 60px rgba(73, 53, 26, 0.10);
+            backdrop-filter: blur(2px);
+        }
+        @keyframes fadeIn {
+            from {opacity:0; transform: translateY(20px);}
+            to {opacity:1; transform: translateY(0);}
+        }
+        .top-badge {
+            display: block;
+            width: fit-content;
+            padding: 8px 18px;
+            margin: 0 auto 18px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(180,130,64,0.18), rgba(255,255,255,0.6));
+            border: 1px solid rgba(180,130,64,0.4);
+            color: #7f5b2e;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .header-box {
+            text-align: center;
+            margin-bottom: 54px;
+        }
+        h1 {
+            color: #6b421b;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+            font-size: clamp(30px, 4vw, 42px);
+            position: relative;
+            padding: 16px 0 12px;
+            font-weight: 700;
+            text-shadow: 0 2px 0 rgba(255,255,255,0.6);
+        }
+        h1::before, h1::after {
+            content: "❖";
+            color: #b48240;
+            font-size: 24px;
+            margin: 0 18px;
+            vertical-align: middle;
+        }
+        .desc-top {
+            color: #60482e;
+            margin-bottom: 26px;
+            line-height: 1.8;
+            font-size: 19px;
+            letter-spacing: 1px;
+        }
+        .divider {
+            width: 220px;
+            height: 2px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, #b48240, transparent);
+            box-shadow: 0 0 12px rgba(180,130,64,0.35);
+            position: relative;
+        }
+        .divider::after {
+            content: "✦";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            background: rgba(255,250,242,0.9);
+            padding: 0 12px;
+            color: #b48240;
+        }
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+        .culture-card {
+            background: linear-gradient(145deg, #fffdf9, #fff6e8);
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid #e0cbae;
+            box-shadow: 0 8px 28px rgba(102, 64, 26, 0.14);
+            transition: all 0.4s cubic-bezier(0.2,0,0.2,1);
+        }
+        /* 奇偶卡片宽度错落，制造节奏感 */
+        .culture-card:nth-child(odd) {
+            width: 92%;
+            align-self: flex-start;
+        }
+        .culture-card:nth-child(even) {
+            width: 92%;
+            align-self: flex-end;
+        }
+        .culture-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 42px rgba(102, 64, 26, 0.20);
+            border-color:#c49c66;
+        }
+        /* 图片在上，文字在下 */
+        .card-img-box {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+        .card-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+        .culture-card:hover .card-img-box img {
+            transform: scale(1.06);
+        }
+        .card-text-box {
+            padding: 32px 36px;
+        }
+        .card-text-box h3 {
+            color: #6b421b;
+            margin-bottom: 16px;
+            font-size: 25px;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .card-text-box h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 72px;
+            height: 2px;
+            background: linear-gradient(90deg, #b48240, #ddb87a);
+        }
+        .card-text-box p {
+            margin-top:14px;
+            color: #54402b;
+            line-height: 1.9;
+            font-size: 17px;
+        }
+        .card-text-box a {
+            color: #915a24;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .card-text-box a:hover {
+            color: #b47c32;
+            text-decoration: underline;
+        }
+        .footer-info {
+            text-align: center;
+            margin-top: 90px;
+            color: #665038;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+        @media (max-width:768px) {
+            .culture-card:nth-child(odd),
+            .culture-card:nth-child(even) {
+                width: 100%;
+                align-self: stretch;
+            }
+            .card-img-box {
+                height:210px;
+            }
+            .card-text-box {
+                padding:24px 20px;
+            }
+            h1 {
+                font-size:29px;
+                letter-spacing:4px;
+            }
+            .wrap {
+                padding:26px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header-box">
+            <div class="top-badge">Cultural Heritage</div>
+            <h1>岁月人文博览</h1>
+            <p class="desc-top">文明留声，古今共鸣</p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="card-container">
+            <div class="culture-card">
+                <div class="card-img-box">
+                    <img src="Qingtong/image/首页.png" alt="古铜镜">
+                </div>
+                <div class="card-text-box">
+                    <h3>古铜镜</h3>
+                    <p>
+                        <a href="Qingtong/Page_1.html">玄光自青铜而生，古镜凝岁月无声。繁复纹样镌刻先民浪漫，清冷镜光流转世代光景。小小铜鉴，照容颜，亦承载绵延不绝的东方古韵。</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <div class="card-img-box">
+                    <img src="Sichou/images/photo-1509316785289-025f5b846b35.avif" alt="丝绸之路">
+                </div>
+                <div class="card-text-box">
+                    <h3>丝绸之路</h3>
+                    <p>
+                        <a href="Sichou/index.html">中卫，宁夏平原的黄河古城。腾格里沙漠与滔滔长河在这里相遇， 驼铃穿越沙海，筏影横渡黄河，让这座边城成为丝绸之路北道上 重要的渡口、驿站与军事要塞。</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <div class="card-img-box">
+                    <img src="Bazhong/assets/img/tremella_museum_exterior.jpg" alt="巴中通江本土文化场馆">
+                </div>
+                <div class="card-text-box">
+                    <h3>巴中通江本土文化场馆</h3>
+                    <p>
+                        <a href="Bazhong/index.html">一座始建于宋代的文庙，到红四方面军总指挥部驻地，再到今天全国爱国主义教育示范基地。一朵银耳沉淀了千年山地农耕智慧，也是巴中独有的、不可复制的本土特色文化名片。</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <div class="card-img-box">
+                    <img src="Shigu/images/images2.jpg" alt="石鼓书院">
+                </div>
+                <div class="card-text-box">
+                    <h3>石鼓书院</h3>
+                    <p>
+                        <a href="Shigu/index.html">千年三江学府，湖湘文脉源头，四大书院名宗。理学思想在此传播，家国情怀在此孕育，深深影响了整个湘南地区的民风教化，也为后世留存下极为珍贵的文化遗产。</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <div class="card-img-box">
+                    <img src="Zhoulibo/微信图片_20260806102518_266_20.jpg" alt="周立波">
+                </div>
+                <div class="card-text-box">
+                    <h3>周立波</h3>
+                    <p>
+                        <a href="Zhoulibo/index.html">这里不仅是一个作家旧居，更是一个承载时代风云、革命记忆与乡土情怀的精神场域。</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

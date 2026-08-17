@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铜镜历史介绍</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* ========== 导航栏样式 ========== */
+        .nav-wrap{
+            position: relative;
+            padding: 28px 60px 10px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(245,236,226,0));
+        }
+        /* 顶部两角淡米色斜角装饰 */
+        .nav-wrap::before,
+        .nav-wrap::after{
+            content: "";
+            position: absolute;
+            top:0;
+            width: 120px;
+            height: 38px;
+            background:#f7efe3;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            opacity: 0.9;
+        }
+        .nav-wrap::before{
+            left:0;
+        }
+        .nav-wrap::after{
+            right:0;
+            transform: scaleX(-1);
+        }
+
+        .nav-container{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 0 16px;
+            border-bottom: 1px solid #d8c8b8;
+        }
+        .title-main{
+            font-size: clamp(26px, 2.2vw, 42px);
+            line-height:1.2;
+            font-family:"SimSun",宋体,serif;
+            color:#8c1c1c;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+        .nav-list{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap: 10px 18px;
+            align-items:center;
+            width: 100%;
+        }
+        .nav-item{
+            font-size: clamp(16px, 1.3vw, 22px);
+            font-family:"SimSun",宋体,serif;
+            color:#8c1c1c;
+            text-decoration:none;
+            padding: 10px 22px;
+            border-radius: 999px;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+        .nav-item:hover,
+        .nav-item:focus-visible{
+            border-color: rgba(140, 28, 28, 0.35);
+            background: rgba(184, 34, 34, 0.05);
+        }
+        .nav-item.active{
+            background:#b82222;
+            color:#ffffff;
+            box-shadow: 0 6px 16px rgba(184, 34, 34, 0.22);
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container hero-header">
+            <div class="hero-text">
+                <h1>古铜镜</h1>
+                <p class="lead">玄光自青铜而生，古镜凝岁月无声。繁复纹样镌刻先民浪漫，清冷镜光流转世代光景。小小铜鉴，照容颜，亦承载绵延不绝的东方古韵。</p>
+                <nav class="nav-inline">
+                    <a class="btn" href="../index.html">首页</a>
+                </nav>
+            </div>
+            <div class="hero-image">
+                <img src="image/首页.png" alt="古铜镜">
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-wrap">
+        <div class="nav-container">
+            <div class="nav-list">
+                <a href="Page_1.html" class="nav-item">历史知识</a>
+                <a href="Page_2.html" class="nav-item">制作工艺</a>
+                <a href="Page_3.html" class="nav-item active">使用途径</a>
+                <a href="Page_4.html" class="nav-item">文化赓续</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+
+        <section class="spot-section">
+            <div class="img-wrap">
+                <img src="image/破镜重圆.png" alt="信物" />
+            </div>
+            <div class="text">
+                <h2>信物</h2>
+                <p>古人常把铜镜作为爱情信物，以 “半镜” 象征夫妻分离，以 “破镜重圆” 喻夫妇失散后重聚或离而复合。</p>
+            </div>
+        </section>
+
+        <section class="spot-section alt">
+            <div class="img-wrap">
+                <img src="image/占卜.png" alt="占卜" />
+            </div>
+            <div class="text">
+                <h2>占卜</h2>
+                <p>铜镜占卜从唐代开始流行，俗称 “镜听”、“镜卜” 等。就是在除夕或岁首的夜里抱着镜子偷听路人的无意之言，以此来占卜吉凶祸福。</p>
+            </div>
+        </section>
+
+        <section class="spot-section">
+            <div class="img-wrap">
+                <img src="image/辟邪.png" alt="辟邪避疟" />
+            </div>
+            <div class="text">
+                <h2>辟邪避疟</h2>
+                <p>道教是中国传统文化中重要的宗教体系之一，它对铜镜辟邪的信仰有着深远的影响。道教认为，铜镜中的反光可以显现出人的精气神，同时也能够照见并驱散邪灵。在民间传说中，铜镜也常常被描绘为辟邪的宝物。例如，传说中的门神秦叔宝和尉迟恭，他们的形象常被刻画在铜镜背面，以期借此两位将军的威猛之力来抵御邪灵。</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

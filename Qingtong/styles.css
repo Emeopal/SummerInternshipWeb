@@ -1,0 +1,63 @@
+/* styles.css — 景点介绍左右交替模板样式 */
+:root{
+  --max-width: 1100px;
+  --gap: 28px;
+  --accent: #1976d2;
+  --muted: #6b7280;
+}
+*{box-sizing:border-box}
+body{
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin:0; color:#111827; background:#f7f7f8; line-height:1.6;
+}
+.container{
+  max-width:var(--max-width); margin:0 auto; padding:40px 20px;
+}
+.hero{ background: linear-gradient(180deg, #ffffff 0%, #eef6ff 100%); padding:48px 0; border-bottom:1px solid #e6eef8; }
+.hero .lead{ color:var(--muted); margin-top:8px }
+.nav-inline{ margin-top:12px }
+.btn{ display:inline-block; text-decoration:none; background:var(--accent); color:#fff; padding:8px 14px; border-radius:6px; margin-right:8px }
+.site-footer{ padding:24px 0; text-align:center; color:var(--muted); border-top:1px solid #e6eef8; background:transparent }
+
+/* 头部主标题右侧图片布局 */
+.hero-header{ display:flex; align-items:center; gap:20px }
+.hero-header .hero-text{ flex:1 }
+.hero-image{ flex:0 0 40%; max-width:560px }
+.hero-image img{ width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; border-radius:8px; box-shadow:0 6px 18px rgba(15,23,42,0.08); display:block; min-height:240px }
+
+/* 段落布局 */
+.spot-section{ display:flex; align-items:center; gap:var(--gap); margin:36px 0; background:#fff; padding:18px; border-radius:10px; box-shadow:0 4px 12px rgba(15,23,42,0.04) }
+.spot-section .img-wrap{ flex:0 0 58%; max-width:58%; height:320px; overflow:hidden; border-radius:8px; background:#f8f1e8; padding:12px; display:flex; align-items:center; justify-content:center; }
+.spot-section .img-wrap img{ width:100%; height:100%; max-height:none; object-fit:contain; object-position:center center; display:block; transform:none; }
+
+/* 保持页面结构不变，仅让图片完整展示 */
+
+/* （已移除）雕像/塑像的专用样式已删除，相关图片将使用通用段落图片样式 */
+.spot-section .text{ flex:1; padding:8px 6px }
+.spot-section h2{ margin-top:0 }
+.spot-section .text p{ margin:10px 0 }
+.spot-section .text ul{ margin:8px 0 0 18px }
+
+/* 交替布局：加 .alt 则图片在右侧 */
+.spot-section.alt{ flex-direction:row-reverse }
+
+/* 响应式：较小屏幕改为垂直堆叠 */
+@media (max-width:900px){
+  .spot-section{ flex-direction:column }
+  .spot-section.alt{ flex-direction:column }
+  .spot-section .img-wrap, .spot-section .img-wrap img{ width:100%; max-width:100%; height:auto }
+  /* 头部在窄屏设备上堆叠 */
+  .hero-header{ flex-direction:column; text-align:center }
+  .hero-image{ max-width:100%; width:100% }
+  .hero-image img{ height:auto; aspect-ratio:auto }
+}
+
+/* 可选小样式 */
+.lead{ font-size:1.05rem }
+img[alt=""]{ filter:grayscale(20%); }
+
+/* 便于打印/导出样式 */
+@media print{
+  .btn, .nav-inline { display:none }
+  body{ background:#fff }
+}

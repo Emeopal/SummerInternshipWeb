@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铜镜制作工艺</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* ========== 导航栏样式 ========== */
+        .nav-wrap{
+            position: relative;
+            padding: 28px 60px 10px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(245,236,226,0));
+        }
+        /* 顶部两角淡米色斜角装饰 */
+        .nav-wrap::before,
+        .nav-wrap::after{
+            content: "";
+            position: absolute;
+            top:0;
+            width: 120px;
+            height: 38px;
+            background:#f7efe3;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            opacity: 0.9;
+        }
+        .nav-wrap::before{
+            left:0;
+        }
+        .nav-wrap::after{
+            right:0;
+            transform: scaleX(-1);
+        }
+
+        .nav-container{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 0 16px;
+            border-bottom: 1px solid #d8c8b8;
+        }
+        .title-main{
+            font-size: clamp(26px, 2.2vw, 42px);
+            line-height:1.2;
+            font-family:"SimSun",宋体,serif;
+            color:#8c1c1c;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+        .nav-list{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap: 10px 18px;
+            align-items:center;
+            width: 100%;
+        }
+        .nav-item{
+            font-size: clamp(16px, 1.3vw, 22px);
+            font-family:"SimSun",宋体,serif;
+            color:#8c1c1c;
+            text-decoration:none;
+            padding: 10px 22px;
+            border-radius: 999px;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+        .nav-item:hover,
+        .nav-item:focus-visible{
+            border-color: rgba(140, 28, 28, 0.35);
+            background: rgba(184, 34, 34, 0.05);
+        }
+        .nav-item.active{
+            background:#b82222;
+            color:#ffffff;
+            box-shadow: 0 6px 16px rgba(184, 34, 34, 0.22);
+        }
+
+        .card-page{
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding: 40px 0 60px;
+        }
+
+        .image-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .craft-card {
+            background: #fffdf9;
+            border: 1px solid #e7d9c4;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(72, 45, 24, 0.08);
+        }
+
+        .craft-card img {
+            display: block;
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+        }
+
+        .craft-text {
+            background: rgba(255, 249, 242, 0.7);
+            border: 1px solid #ead8c0;
+            border-radius: 18px;
+            padding: 28px 32px;
+        }
+
+        .craft-text h2 {
+            margin-bottom: 12px;
+            color: #7d1d1d;
+            font-size: clamp(24px, 2vw, 34px);
+            font-family: "SimSun", 宋体, serif;
+        }
+
+        .craft-text p {
+            color: #5c4b3a;
+            font-size: 18px;
+            line-height: 2;
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container hero-header">
+            <div class="hero-text">
+                <h1>古铜镜</h1>
+                <p class="lead">玄光自青铜而生，古镜凝岁月无声。繁复纹样镌刻先民浪漫，清冷镜光流转世代光景。小小铜鉴，照容颜，亦承载绵延不绝的东方古韵。</p>
+                <nav class="nav-inline">
+                    <a class="btn" href="../index.html">首页</a>
+                </nav>
+            </div>
+            <div class="hero-image">
+                <img src="image/首页.png" alt="古铜镜">
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-wrap">
+        <div class="nav-container">
+            <div class="nav-list">
+                <a href="Page_1.html" class="nav-item">历史知识</a>
+                <a href="Page_2.html" class="nav-item active">制作工艺</a>
+                <a href="Page_3.html" class="nav-item">使用途径</a>
+                <a href="Page_4.html" class="nav-item">文化赓续</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="container card-page">
+        <div class="image-row">
+            <figure class="craft-card">
+                <img src="image/制作铜镜.png" alt="铜镜制作工艺图示">
+            </figure>
+            <figure class="craft-card">
+                <img src="image/制作流程.png" alt="铜镜工艺细节图">
+            </figure>
+        </div>
+
+        <section class="craft-text">
+            <h2>铜镜的制作工艺</h2>
+            <p>铜镜的铸制，始于精密的镜模设计与范型制作，随后将铜锡铅按比例熔炼，再灌注入范腔成型。成镜之后还要经过修整、打磨与抛光，才能使镜面光润如水。每一道工序都依赖匠人细致的手艺与耐心，才能让古铜之色与纹饰在无声中凝住光年。</p>
+        </section>
+    </main>
+</body>
+</html>
